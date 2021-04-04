@@ -15,7 +15,7 @@ class _WalkthroughState extends State<Walkthrough> {
           "Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
               " Vestibulum ac diam sit amet quam vehicula elementum sed sit amet "
               "dui. Nulla porttitor accumsan tincidunt.",
-      "img": "assets/on1.png",
+      "img": "on1.png",
     },
     {
       "title": "Fast Delivery",
@@ -23,7 +23,7 @@ class _WalkthroughState extends State<Walkthrough> {
           "Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
               " Vestibulum ac diam sit amet quam vehicula elementum sed sit amet "
               "dui. Nulla porttitor accumsan tincidunt.",
-      "img": "assets/on2.png",
+      "img": "on2.png",
     },
     {
       "title": "Easy Payment",
@@ -31,7 +31,7 @@ class _WalkthroughState extends State<Walkthrough> {
           "Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
               " Vestibulum ac diam sit amet quam vehicula elementum sed sit amet "
               "dui. Nulla porttitor accumsan tincidunt.",
-      "img": "assets/on3.png",
+      "img": "on3.png",
     },
   ];
   @override

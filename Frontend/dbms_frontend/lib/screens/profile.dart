@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
                 Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Image.asset(
-                    "assets/cm4.jpeg",
+                    "cm4.jpeg",
                     fit: BoxFit.cover,
                     width: 100.0,
                     height: 100.0,
