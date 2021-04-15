@@ -87,9 +87,8 @@ class _DashboardState extends State<Dashboard> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                          'https://placeimg.com/640/480/nature/grayscale',
-                          fit: BoxFit.fill,
+                        Image.asset(
+                          'assets/images/resrtble.png',
                         ),
                         Container(
                           child: Column(

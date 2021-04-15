@@ -7,17 +7,17 @@ List<MaterialColor> colors = [
   Colors.lightBlue,
 ];
 List<String> newTexts = [
-  "New Tickets!",
-  "New task!",
-  "New Orders!",
-  "New Tickets!"
+  "Orders History",
+  "Pending Orders",
+  "Ingedients available",
+  "Tables Status"
 ];
 List<String> randomNumbers = ["13", "12", "124", "13", "14"];
 List<IconData> icons = [
-  Icons.menu,
+  Icons.check,
   Icons.track_changes,
   Icons.shopping_cart,
-  Icons.question_answer
+  Icons.stacked_bar_chart
 ];
 List<String> elementsName = [
   "Hydrogen",

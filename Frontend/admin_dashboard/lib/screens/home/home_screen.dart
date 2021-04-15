@@ -16,7 +16,7 @@ class HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    tabController = new TabController(vsync: this, length: 3, initialIndex: 0)
+    tabController = new TabController(vsync: this, length: 5, initialIndex: 0)
       ..addListener(() {
         setState(() {
           active = tabController.index;
@@ -53,14 +53,16 @@ class HomeScreenState extends State<HomeScreen>
               ),
             ]),
         actions: <Widget>[
-          Container(child: Icon(Icons.web)),
-          SizedBox(width: 32),
           Container(child: Icon(Icons.account_circle)),
           SizedBox(width: 32),
           Container(
             child: IconButton(
               padding: EdgeInsets.all(0),
-              icon: Icon(Icons.exit_to_app),
+              icon: Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+              ),
+              tooltip: 'Logout',
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -95,6 +97,8 @@ class HomeScreenState extends State<HomeScreen>
                 Dashboard(),
                 FormMaterial(),
                 HeroAnimation(),
+                FormMaterial(),
+                Dashboard(),
               ],
             ),
           )
@@ -154,7 +158,7 @@ class HomeScreenState extends State<HomeScreen>
                   width: 8,
                 ),
                 Text(
-                  "Forms",
+                  "Orders History",
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'HelveticaNeue',
@@ -180,7 +184,59 @@ class HomeScreenState extends State<HomeScreen>
                   width: 8,
                 ),
                 Text(
-                  "Hero",
+                  "Pending Orders",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'HelveticaNeue',
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ),
+        FlatButton(
+          color: tabController.index == 2 ? Colors.grey[100] : Colors.white,
+          onPressed: () {
+            tabController.animateTo(3);
+            drawerStatus ? Navigator.pop(context) : print("");
+          },
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: EdgeInsets.only(top: 22, bottom: 22, right: 22),
+              child: Row(children: [
+                Icon(Icons.category),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Ingredients Available",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'HelveticaNeue',
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ),
+        FlatButton(
+          color: tabController.index == 2 ? Colors.grey[100] : Colors.white,
+          onPressed: () {
+            tabController.animateTo(4);
+            drawerStatus ? Navigator.pop(context) : print("");
+          },
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: EdgeInsets.only(top: 22, bottom: 22, right: 22),
+              child: Row(children: [
+                Icon(Icons.category),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Tables Status",
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'HelveticaNeue',
