@@ -53,41 +53,6 @@ class HomeScreenState extends State<HomeScreen>
               ),
             ]),
         actions: <Widget>[
-          InkWell(
-            onTap: () {
-              print("download");
-            },
-            child: Container(
-              margin: EdgeInsets.all(12),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Icon(
-                    Icons.cloud_download,
-                    color: Colors.black,
-                    size: 22,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "Download Now",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      fontFamily: 'HelveticaNeue',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(width: 32),
           Container(child: Icon(Icons.web)),
           SizedBox(width: 32),
           Container(child: Icon(Icons.account_circle)),
