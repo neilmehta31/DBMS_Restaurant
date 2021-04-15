@@ -33,8 +33,9 @@ class _CartScreenState extends State<CartScreen>
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: "Checkout",
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Checkout'),
+        icon: Icon(Icons.arrow_forward),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -44,9 +45,6 @@ class _CartScreenState extends State<CartScreen>
             ),
           );
         },
-        child: Icon(
-          Icons.arrow_forward,
-        ),
         heroTag: Object(),
       ),
     );

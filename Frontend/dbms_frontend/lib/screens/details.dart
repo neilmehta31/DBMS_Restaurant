@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dbms_frontend/screens/notifications.dart';
 import 'package:dbms_frontend/util/comments.dart';
 import 'package:dbms_frontend/util/const.dart';
 import 'package:dbms_frontend/util/foods.dart';
@@ -17,7 +16,6 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
             Icons.keyboard_backspace,
@@ -29,23 +27,6 @@ class _ProductDetailsState extends State<ProductDetails> {
           "Item Details",
         ),
         elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: IconBadge(
-              icon: Icons.notifications,
-              size: 22.0,
-            ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return Notifications();
-                  },
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),

@@ -1,7 +1,5 @@
 import 'package:dbms_frontend/screens/tableReserve.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:dbms_frontend/screens/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

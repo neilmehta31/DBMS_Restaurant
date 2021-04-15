@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class GridProduct extends StatelessWidget {
   final String name;
   final String img;
-  final bool isFav;
+  // final bool isFav;
   final double rating;
   final int raters;
 
@@ -14,7 +14,7 @@ class GridProduct extends StatelessWidget {
       {Key key,
       @required this.name,
       @required this.img,
-      @required this.isFav,
+      // @required this.isFav,
       @required this.rating,
       @required this.raters})
       : super(key: key);
@@ -36,24 +36,6 @@ class GridProduct extends StatelessWidget {
                   child: Image.asset(
                     "$img",
                     fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: -10.0,
-                bottom: 3.0,
-                child: RawMaterialButton(
-                  onPressed: () {},
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  elevation: 4.0,
-                  child: Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Icon(
-                      isFav ? Icons.favorite : Icons.favorite_border,
-                      color: Colors.red,
-                      size: 17,
-                    ),
                   ),
                 ),
               ),

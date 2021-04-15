@@ -1,4 +1,3 @@
-import 'package:dbms_frontend/screens/tableReserve.dart';
 import 'package:flutter/material.dart';
 import 'package:dbms_frontend/screens/login.dart';
 import 'package:dbms_frontend/screens/register.dart';

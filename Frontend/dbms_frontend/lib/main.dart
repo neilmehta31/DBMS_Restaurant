@@ -1,9 +1,8 @@
-import 'package:dbms_frontend/screens/tableReserve.dart';
+import 'package:dbms_frontend/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/app_provider.dart';
-import 'screens/splash.dart';
 import 'util/const.dart';
 
 void main() {
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
           title: Constants.appName,
           theme: appProvider.theme,
           darkTheme: Constants.lightTheme,
-          home: SplashScreen(),
+          home: MainScreen(),
         );
       },
     );
