@@ -1,3 +1,4 @@
+import 'package:dbms_frontend/screens/tableReserve.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: appProvider.navigatorKey,
           title: Constants.appName,
           theme: appProvider.theme,
-          darkTheme: Constants.darkTheme,
+          darkTheme: Constants.lightTheme,
           home: SplashScreen(),
         );
       },
