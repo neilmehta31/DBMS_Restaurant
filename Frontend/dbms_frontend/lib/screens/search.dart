@@ -7,6 +7,7 @@ import 'package:dbms_frontend/util/foods.dart';
 import 'package:dbms_frontend/widgets/smooth_star_rating.dart';
 
 import 'join.dart';
+import 'placedOrders.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -68,6 +69,18 @@ class _SearchScreenState extends State<SearchScreen>
                   return CartScreen();
                 }));
                 // ...
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Order Status'),
+              leading: Icon(Icons.home),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext builder) => PlacedOrders()));
+                // Update the state of the app.
                 Navigator.pop(context);
               },
             ),

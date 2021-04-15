@@ -1,4 +1,5 @@
 import 'package:dbms_frontend/screens/join.dart';
+import 'package:dbms_frontend/screens/placedOrders.dart';
 import 'package:flutter/material.dart';
 
 class MakeDrawer extends StatelessWidget {
@@ -53,6 +54,18 @@ class MakeDrawer extends StatelessWidget {
               // Update the state of the app.
               _pageController.jumpToPage(2);
               // ...
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text('Order Status'),
+            leading: Icon(Icons.home),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) => PlacedOrders()));
+              // Update the state of the app.
               Navigator.pop(context);
             },
           ),
