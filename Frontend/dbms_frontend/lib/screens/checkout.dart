@@ -1,3 +1,4 @@
+import 'package:dbms_frontend/screens/placedOrders.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dbms_frontend/util/foods.dart';
@@ -229,7 +230,14 @@ class _CheckoutState extends State<Checkout> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        print('tapped place orders!!');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext builder) =>
+                                    PlacedOrders()));
+                      },
                     ),
                   ),
                 ],

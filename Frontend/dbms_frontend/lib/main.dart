@@ -1,4 +1,5 @@
 import 'package:dbms_frontend/screens/main_screen.dart';
+import 'package:dbms_frontend/screens/placedOrders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           title: Constants.appName,
           theme: appProvider.theme,
           darkTheme: Constants.lightTheme,
-          home: MainScreen(),
+          home: PlacedOrders(),
         );
       },
     );
