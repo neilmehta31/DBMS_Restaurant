@@ -59,14 +59,13 @@ class MakeDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text('Order Status'),
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.food_bank_sharp),
             onTap: () {
+              print('tapped order Status in drawer!!');
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext builder) => PlacedOrders()));
-              // Update the state of the app.
-              Navigator.pop(context);
             },
           ),
           ListTile(
