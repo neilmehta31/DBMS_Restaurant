@@ -1,12 +1,21 @@
+ CREATE USER veer@localhost IDENTIFIED BY 'mahavir';
+Query OK, 0 rows affected (0.44 sec)
+
+mysql> create database rest;
+Query OK, 1 row affected (0.17 sec)
+
+mysql> use rest;
+Database changed
+
+
+
+
 mysql> CREATE TABLE CUSTOMERS(CUSTOMER_ID PRIMARY KEY INT, CUSTOMER_NAME VARCHAR(20), ADDRESS VARCHAR(50), PHONE_NO INT,BILLING_AMT INT, PEOPLE_ACCOMPANYING INT, TIMESTAMP DATETIME, BENCH_NUM INT);
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIMARY KEY INT, CUSTOMER_NAME VARCHAR(20), ADDRESS VARCHAR(50), PHONE_NO INT,BI' at line 1
 mysql> CREATE TABLE CUSTOMERS(CUSTOMER_ID PRIMARY KEY, CUSTOMER_NAME VARCHAR(20), ADDRESS VARCHAR(50), PHONE_NO INT,BILLING_AMT INT, PEOPLE_ACCOMPANYING INT, TIMESTAMP DATETIME, BENCH_NUM INT);
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRIMARY KEY, CUSTOMER_NAME VARCHAR(20), ADDRESS VARCHAR(50), PHONE_NO INT,BILLIN' at line 1
 mysql> CREATE TABLE CUSTOMERS(CUSTOMER_ID INT PRIMARY KEY, CUSTOMER_NAME VARCHAR(20), ADDRESS VARCHAR(50), PHONE_NO INT,BILLING_AMT INT, PEOPLE_ACCOMPANYING INT, TIMESTAMP DATETIME, BENCH_NUM INT);
 Query OK, 0 rows affected (0.54 sec)
-
-mysql> CREATE TABLE USER(EMAIL VARCHAR(50) PRIMARY KEY, PASSWORD VARCHAR(15));
-Query OK, 0 rows affected (1.75 sec)
 
 mysql> CREATE TABLE BENCH(BENCH_NUM INT PRIMARY KEY, ISOCCUPIED BOOLEAN, WAITER_ID INT);
 Query OK, 0 rows affected (2.27 sec)
@@ -55,3 +64,95 @@ Records: 0  Duplicates: 0  Warnings: 0
 mysql> ALTER TABLE BENCH_MEAL ADD FOREIGN KEY (MEAL_ID) REFERENCES MEAL(MEAL_ID);
 Query OK, 0 rows affected (3.29 sec)
 Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> ALTER TABLE customers ADD  email varchar(35) after customer_name;
+Query OK, 0 rows affected (2.35 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE customers ADD  password varchar(30) after email;
+Query OK, 0 rows affected (1.55 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> desc customers;
++---------------------+-------------+------+-----+---------+-------+
+| Field               | Type        | Null | Key | Default | Extra |
++---------------------+-------------+------+-----+---------+-------+
+| CUSTOMER_ID         | int         | NO   | PRI | NULL    |       |
+| CUSTOMER_NAME       | varchar(20) | YES  |     | NULL    |       |
+| email               | varchar(35) | YES  |     | NULL    |       |
+| password            | varchar(30) | YES  |     | NULL    |       |
+| ADDRESS             | varchar(50) | YES  |     | NULL    |       |
+| PHONE_NO            | int         | YES  |     | NULL    |       |
+| BILLING_AMT         | int         | YES  |     | NULL    |       |
+| PEOPLE_ACCOMPANYING | int         | YES  |     | NULL    |       |
+| TIMESTAMP           | datetime    | YES  |     | NULL    |       |
+| BENCH_NUM           | int         | YES  | MUL | NULL    |       |
++---------------------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+
+mysql> desc bench
+    -> ;
++------------+------------+------+-----+---------+-------+
+| Field      | Type       | Null | Key | Default | Extra |
++------------+------------+------+-----+---------+-------+
+| BENCH_NUM  | int        | NO   | PRI | NULL    |       |
+| ISOCCUPIED | tinyint(1) | YES  |     | NULL    |       |
+| WAITER_ID  | int        | YES  | MUL | NULL    |       |
++------------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc bench_meal;
++-----------+------+------+-----+---------+-------+
+| Field     | Type | Null | Key | Default | Extra |
++-----------+------+------+-----+---------+-------+
+| ORDER_ID  | int  | NO   | PRI | NULL    |       |
+| BENCH_NUM | int  | YES  | MUL | NULL    |       |
+| MEAL_ID   | int  | YES  | MUL | NULL    |       |
++-----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+mysql> desc meal;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| MEAL_ID    | int         | NO   | PRI | NULL    |       |
+| MEAL_NAME  | varchar(20) | YES  |     | NULL    |       |
+| MEAL_PRICE | int         | YES  |     | NULL    |       |
+| RATING     | int         | YES  |     | NULL    |       |
+| EST_TIME   | time        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc waiter;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| WAITER_ID   | int         | NO   | PRI | NULL    |       |
+| WAITER_NAME | varchar(20) | YES  |     | NULL    |       |
+| PHONE_NO    | int         | YES  | UNI | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc ingredient;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| INGREDIENT_ID   | int         | NO   | PRI | NULL    |       |
+| INGREDIENT_NAME | varchar(20) | YES  |     | NULL    |       |
+| INGREDIENT_AV   | tinyint(1)  | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc MEAL_INGREDIENT;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| COMBO_ID      | int  | NO   | PRI | NULL    |       |
+| MEAL_ID       | int  | YES  | MUL | NULL    |       |
+| INGREDIENT_ID | int  | YES  | MUL | NULL    |       |
++---------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
