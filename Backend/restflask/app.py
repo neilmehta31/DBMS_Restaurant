@@ -6,7 +6,7 @@ mysql = MySQL(app)
 
 class flask_mysqldb.MySQL(app)
     def connection():
-        
+       
 
 @app.route('/')
 def users():
