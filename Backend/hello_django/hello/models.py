@@ -21,7 +21,6 @@ class Bench(models.Model):
     )
 class Bench_meal(models.Model): 
     OrderID = models.IntegerField(primary_key = True)
-    isOccupied = models.BooleanField(verbose_name=('Table available'), default= True)
     bench_num = models.ForeignKey(
         to='Bench', on_delete = models.CASCADE,
     )     
@@ -39,11 +38,6 @@ class Waiter(models.Model):
     waiter_id = models.IntegerField(primary_key = True)
     waiter_name = models.CharField(max_length = 20)
  
-class Waiter_phone(models.Model):
-    waiter_phoneNo = PhoneNumberField(blank=False, primary_key = True)
-    waiter_name = models.ForeignKey(
-        to='Waiter', on_delete = models.CASCADE,
-    )
 class Bench_meal(models.Model): 
     ComboID = models.IntegerField(primary_key = True)
     isOccupied = models.BooleanField(verbose_name=('Table available'), default= True)
@@ -59,3 +53,7 @@ class Ingredient(models.Model):
     Ingredient_name = models.CharField(max_length = 20)
     Ingredient_available = models.BooleanField(verbose_name=('Ingredient available'), default= True)
 
+
+# INGREDN ID     NAME      BooleanFiel      meal_id
+# 101            CSD       TRUE              201
+# 102            DFSF      TRUE              201
