@@ -1,11 +1,7 @@
+import 'package:dbms_frontend/screens/search.dart';
 import 'package:flutter/material.dart';
-import 'package:dbms_frontend/screens/dishes.dart';
 import 'package:dbms_frontend/widgets/grid_product.dart';
-import 'package:dbms_frontend/widgets/home_category.dart';
-import 'package:dbms_frontend/widgets/slider_item.dart';
 import 'package:dbms_frontend/util/foods.dart';
-import 'package:dbms_frontend/util/categories.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -22,113 +18,31 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     return result;
   }
 
-  int _current = 0;
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Search'),
+        elevation: 4.0,
+        icon: Icon(Icons.search),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext builder) => SearchScreen())),
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
         child: ListView(
           children: <Widget>[
+            SizedBox(height: 10.0),
+            SizedBox(height: 10.0),
+            SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Dishes",
-                  style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                FlatButton(
-                  child: Text(
-                    "View More",
-                    style: TextStyle(
-//                      fontSize: 22,
-//                      fontWeight: FontWeight.w800,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return DishesScreen();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-
-            SizedBox(height: 10.0),
-
-            //Slider Here
-
-            CarouselSlider(
-              height: MediaQuery.of(context).size.height / 2.4,
-              items: map<Widget>(
-                foods,
-                (index, i) {
-                  Map food = foods[index];
-                  return SliderItem(
-                    img: food['img'],
-                    isFav: false,
-                    name: food['name'],
-                    rating: 5.0,
-                    raters: 23,
-                  );
-                },
-              ).toList(),
-              autoPlay: true,
-//                enlargeCenterPage: true,
-              viewportFraction: 1.0,
-//              aspectRatio: 2.0,
-              onPageChanged: (index) {
-                setState(() {
-                  _current = index;
-                });
-              },
-            ),
-            SizedBox(height: 20.0),
-
-            Text(
-              "Food Categories",
-              style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            SizedBox(height: 10.0),
-
-            Container(
-              height: 65.0,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: categories == null ? 0 : categories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  Map cat = categories[index];
-                  return HomeCategory(
-                    icon: cat['icon'],
-                    title: cat['name'],
-                    items: cat['items'].toString(),
-                    isHome: true,
-                  );
-                },
-              ),
-            ),
-
-            SizedBox(height: 20.0),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "Popular Items",
+                  "Menu Items",
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.w800,
@@ -148,7 +62,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
               ],
             ),
             SizedBox(height: 10.0),
-
             GridView.builder(
               shrinkWrap: true,
               primary: false,
@@ -166,14 +79,12 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
 //                print(foods.length);
                 return GridProduct(
                   img: food['img'],
-                  isFav: false,
                   name: food['name'],
                   rating: 5.0,
                   raters: 23,
                 );
               },
             ),
-
             SizedBox(height: 30),
           ],
         ),

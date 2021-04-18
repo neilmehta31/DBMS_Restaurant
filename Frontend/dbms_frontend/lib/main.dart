@@ -1,8 +1,10 @@
+import 'package:dbms_frontend/screens/checkout.dart';
+import 'package:dbms_frontend/screens/placedOrders.dart';
+import 'package:dbms_frontend/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/app_provider.dart';
-import 'screens/splash.dart';
 import 'util/const.dart';
 
 void main() {
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: appProvider.navigatorKey,
           title: Constants.appName,
           theme: appProvider.theme,
-          darkTheme: Constants.darkTheme,
+          darkTheme: Constants.lightTheme,
           home: SplashScreen(),
         );
       },

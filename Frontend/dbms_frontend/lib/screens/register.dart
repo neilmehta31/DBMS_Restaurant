@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dbms_frontend/screens/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -193,45 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Divider(
             color: Theme.of(context).accentColor,
           ),
-          SizedBox(height: 10.0),
-          Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width / 2,
-              child: Row(
-                children: <Widget>[
-                  RawMaterialButton(
-                    onPressed: () {},
-                    fillColor: Colors.blue[800],
-                    shape: CircleBorder(),
-                    elevation: 4.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Icon(
-                        FontAwesomeIcons.facebookF,
-                        color: Colors.white,
-//              size: 24.0,
-                      ),
-                    ),
-                  ),
-                  RawMaterialButton(
-                    onPressed: () {},
-                    fillColor: Colors.white,
-                    shape: CircleBorder(),
-                    elevation: 4.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Icon(
-                        FontAwesomeIcons.google,
-                        color: Colors.blue[800],
-//              size: 24.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 30.0),
         ],
       ),
     );

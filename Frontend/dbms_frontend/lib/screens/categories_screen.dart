@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dbms_frontend/screens/notifications.dart';
 import 'package:dbms_frontend/util/categories.dart';
 import 'package:dbms_frontend/util/foods.dart';
 import 'package:dbms_frontend/widgets/badge.dart';
@@ -35,15 +34,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               icon: Icons.notifications,
               size: 22.0,
             ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return Notifications();
-                  },
-                ),
-              );
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -98,7 +89,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 Map food = foods[index];
                 return GridProduct(
                   img: food['img'],
-                  isFav: false,
                   name: food['name'],
                   rating: 5.0,
                   raters: 23,

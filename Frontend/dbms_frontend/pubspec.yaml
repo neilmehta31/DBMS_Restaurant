@@ -30,7 +30,6 @@ dependencies:
   introduction_screen: ^1.0.8
   shared_preferences: ^0.5.4+5
   font_awesome_flutter: ^8.5.0
-  carousel_slider: ^1.4.1
   provider: ^4.0.1
 
 dev_dependencies:

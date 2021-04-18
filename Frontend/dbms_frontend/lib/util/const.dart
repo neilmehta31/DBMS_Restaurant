@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-class Constants{
 
-  static String appName = "Restaurant App UI KIT";
+class Constants {
+  static String appName = "DBMS Restaurant App";
 
   //Colors for theme
 //  Color(0xfffcfcff);
@@ -12,11 +12,27 @@ class Constants{
   static Color lightBG = Color(0xfffcfcff);
   static Color darkBG = Colors.black;
   static Color ratingBG = Colors.yellow[600];
+  static Color statusColourPlaced = Colors.purple;
+  static Color statusColourAccepted = Colors.amber;
+  static Color statusColourReady = Colors.green;
+
+  static Text statusTextPlaced = Text(
+    'Order Placed',
+    style: TextStyle(color: Colors.white),
+  );
+  static Text statusTextAccepted = Text(
+    'Order Accepted',
+    style: TextStyle(color: Colors.white),
+  );
+  static Text statusTextReady = Text(
+    'Order Ready',
+    style: TextStyle(color: Colors.white),
+  );
 
   static ThemeData lightTheme = ThemeData(
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
-    accentColor:  lightAccent,
+    accentColor: lightAccent,
     cursorColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
@@ -53,6 +69,4 @@ class Constants{
 //      ),
     ),
   );
-
-
 }

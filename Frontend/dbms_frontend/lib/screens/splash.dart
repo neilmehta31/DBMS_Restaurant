@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:dbms_frontend/screens/join.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dbms_frontend/screens/walkthrough.dart';
 import 'package:dbms_frontend/util/const.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return Walkthrough();
+          return JoinApp();
         },
       ),
     );

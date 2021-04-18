@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dbms_frontend/screens/notifications.dart';
 import 'package:dbms_frontend/util/foods.dart';
 import 'package:dbms_frontend/widgets/badge.dart';
 import 'package:dbms_frontend/widgets/grid_product.dart';
@@ -26,23 +25,6 @@ class _DishesScreenState extends State<DishesScreen> {
           "Dishes",
         ),
         elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: IconBadge(
-              icon: Icons.notifications,
-              size: 22.0,
-            ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return Notifications();
-                  },
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
@@ -71,7 +53,6 @@ class _DishesScreenState extends State<DishesScreen> {
                 Map food = foods[index];
                 return GridProduct(
                   img: food['img'],
-                  isFav: false,
                   name: food['name'],
                   rating: 5.0,
                   raters: 23,
@@ -102,7 +83,6 @@ class _DishesScreenState extends State<DishesScreen> {
                 Map food = foods[index];
                 return GridProduct(
                   img: food['img'],
-                  isFav: false,
                   name: food['name'],
                   rating: 5.0,
                   raters: 23,
@@ -133,7 +113,6 @@ class _DishesScreenState extends State<DishesScreen> {
                 Map food = foods[index];
                 return GridProduct(
                   img: food['img'],
-                  isFav: false,
                   name: food['name'],
                   rating: 5.0,
                   raters: 23,
