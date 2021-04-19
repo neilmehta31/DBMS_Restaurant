@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rest
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,6 +38,7 @@ CREATE TABLE `bench` (
 
 LOCK TABLES `bench` WRITE;
 /*!40000 ALTER TABLE `bench` DISABLE KEYS */;
+INSERT INTO `bench` VALUES (0,0,1),(1,1,2),(2,0,3),(3,0,4),(4,0,5),(5,0,1),(6,0,2),(7,0,3),(8,0,4),(9,0,5),(10,0,1),(11,0,2),(12,0,3),(13,0,4),(14,0,5),(15,0,1),(16,0,2),(17,0,3),(18,0,4),(19,0,5),(20,0,1),(21,0,2),(22,0,3),(23,0,4),(24,0,5),(25,0,1),(26,0,2),(27,0,3),(28,0,4),(29,0,5);
 /*!40000 ALTER TABLE `bench` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-19 12:17:52
+-- Dump completed on 2021-04-20  1:50:34
