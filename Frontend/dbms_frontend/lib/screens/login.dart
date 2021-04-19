@@ -13,7 +13,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var apiservice = ApiService();
     return Padding(
       padding: EdgeInsets.fromLTRB(20.0, 0, 20, 0),
       child: ListView(
@@ -149,14 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               onPressed: () {
-                apiservice.apilogin();
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (BuildContext context) {
-                //       return TableReserve();
-                //     },
-                //   ),
-                // );
+                login();
               },
               color: Theme.of(context).accentColor,
             ),
@@ -169,5 +161,20 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  void login() async {
+    var apiservice = ApiService();
+    var loginstatus =
+        await apiservice.apilogin(_usernameControl.text, _passwordControl.text);
+    if (loginstatus == 'true') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return TableReserve();
+          },
+        ),
+      );
+    }
   }
 }

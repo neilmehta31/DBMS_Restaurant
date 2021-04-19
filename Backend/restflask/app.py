@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pymysql
+import json
 
 db = pymysql.connect(host='localhost',
         user='veer',
@@ -8,6 +10,7 @@ db = pymysql.connect(host='localhost',
         charset='utf8mb4')
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
@@ -33,25 +36,39 @@ def csignup():
     cursor.close()
     return "Success"
 
-@app.route('/login/customer', methods=['GET'])
+@app.route('/login/customer', methods=['POST'])
 def clogin():
     cursor = db.cursor()
     data = request.get_json()
     email = data['EMAIL']
     password = data['PASSWORD']
+    print(email,'<email and pass>',password)
     sql = "SELECT PASSWORD FROM CUSTOMERS WHERE EMAIL = %s"
     cursor.execute(sql, email)
-    passwordmatch = cursor.fetchall()[0][0]
+    incomingpassword = cursor.fetchall()
+    passwordmatch = incomingpassword[0][0]
     print(password, passwordmatch)
     cursor.close()
     if passwordmatch == password:
         return jsonify(True)
     else:
-        return "email/password does not match, please re-enter"
+        return jsonify(False)
+        
 
 @app.route('/')
 def home():
     return "success"
+
+
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {
+    'status': 404,
+    'message': 'Not Found: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 404
+    return resp
 
 if __name__ == '__main__':
     app.run(debug=True)
