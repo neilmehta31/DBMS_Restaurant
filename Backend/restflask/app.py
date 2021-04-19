@@ -14,31 +14,31 @@ CORS(app)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
-    cursor = db.cursor()
+    # cursor = db.cursor()
     data = request.get_json()
     
-    sql = "SELECT COUNT(*) FROM CUSTOMERS"
-    cursor.execute(sql)
-    usercount = cursor.fetchall()
+    # sql = "SELECT COUNT(*) FROM CUSTOMERS"
+    # cursor.execute(sql)
+    # usercount = cursor.fetchall()
     
-    id = int(usercount[0][0])+1
-    CUSTOMER_NAME = data['CUSTOMER_NAME']
-    PASSWORD = data['PASSWORD']
-    EMAIL = data['EMAIL']
-    ADDRESS = data['ADDRESS']
-    PHONE_NO = data['PHONE_NO']
-    BILLING_AMT = data['BILLING_AMT']
-    PEOPLE_ACCOMPANYING = data['PEOPLE_ACCOMPANYING']
-    ENTRYTIME = datetime.now()
-    BENCH_NUM = data['BENCH_NUM']
-    EXITTIME = data['EXITTIME']
-    sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
-    cursor.execute(sql,  params)
-    
-    db.commit()
-    cursor.close()
-    return jsonify(True)
+    # id = int(usercount[0][0])+1
+    # CUSTOMER_NAME = data['CUSTOMER_NAME']
+    # PASSWORD = data['PASSWORD']
+    # EMAIL = data['EMAIL']
+    # ADDRESS = data['ADDRESS']
+    # PHONE_NO = data['PHONE_NO']
+    # BILLING_AMT = data['BILLING_AMT']
+    # PEOPLE_ACCOMPANYING = data['PEOPLE_ACCOMPANYING']
+    # ENTRYTIME = datetime.now()
+    # BENCH_NUM = data['BENCH_NUM']
+    # EXITTIME = data['EXITTIME']
+    # sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
+    # params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
+    # cursor.execute(sql,  params)
+    print(data)
+    # db.commit()
+    # cursor.close()
+    return jsonify({'result':'True'})
 
 @app.route('/login/customer', methods=['POST'])
 def clogin():
@@ -53,18 +53,19 @@ def clogin():
     passwordmatch = incomingpassword[0][0]
     cursor.close()
     if passwordmatch == password:
-        return jsonify(True)
+        return jsonify({'result':'True'})
     else:
-        return jsonify(False)
+        return jsonify({'result':'False'})
         
 
 
 @app.route('/bench',methods=['GET'])
 def getbenchdetails():
-    cursor = db.cursor()
-    sql = "SELECT * FROM BENCH"
-    cursor.execute(sql)
-    tabledetails = cursor.fetchall()
+    # cursor = db.cursor()
+    # sql = "SELECT * FROM BENCH"
+    # cursor.execute(sql)
+    # tabledetails = cursor.fetchall()
+    tabledetails = [1,2]
     return jsonify(tabledetails)
 
 
