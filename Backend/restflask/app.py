@@ -33,7 +33,7 @@ def csignup():
     BENCH_NUM = data['BENCH_NUM']
     EXITTIME = data['EXITTIME']
     sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, TIMESTAMP, BENCH_NUM, EXITTIME]
+    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
     cursor.execute(sql,  params)
     
     db.commit()
@@ -49,7 +49,6 @@ def clogin():
     sql = "SELECT PASSWORD FROM CUSTOMERS WHERE EMAIL = %s"
     cursor.execute(sql, email)
     passwordmatch = cursor.fetchall()[0][0]
-    print(password, passwordmatch)
     cursor.close()
     if passwordmatch == password:
         return jsonify(True)
