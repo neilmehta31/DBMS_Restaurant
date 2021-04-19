@@ -1,4 +1,5 @@
 import 'package:dbms_frontend/screens/tableReserve.dart';
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var apiservice = ApiService();
     return Padding(
       padding: EdgeInsets.fromLTRB(20.0, 0, 20, 0),
       child: ListView(
@@ -147,13 +149,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return TableReserve();
-                    },
-                  ),
-                );
+                apiservice.apilogin();
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (BuildContext context) {
+                //       return TableReserve();
+                //     },
+                //   ),
+                // );
               },
               color: Theme.of(context).accentColor,
             ),
