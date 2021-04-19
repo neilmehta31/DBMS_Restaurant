@@ -14,15 +14,15 @@ CORS(app)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
-    # cursor = db.cursor()
+    cursor = db.cursor()
     data = request.get_json()
     
-    # sql = "SELECT COUNT(*) FROM CUSTOMERS"
-    # cursor.execute(sql)
-    # usercount = cursor.fetchall()
+    sql = "SELECT COUNT(*) FROM CUSTOMERS"
+    cursor.execute(sql)
+    usercount = cursor.fetchall()
     
-    # id = int(usercount[0][0])+1
-    # CUSTOMER_NAME = data['CUSTOMER_NAME']
+    id = int(usercount[0][0])+1
+    name = data['CUSTOMER_NAME']
     # PASSWORD = data['PASSWORD']
     # EMAIL = data['EMAIL']
     # ADDRESS = data['ADDRESS']
@@ -35,7 +35,7 @@ def csignup():
     # sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
     # params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
     # cursor.execute(sql,  params)
-    print(data)
+    print(name)
     # db.commit()
     # cursor.close()
     return jsonify({'result':'True'})

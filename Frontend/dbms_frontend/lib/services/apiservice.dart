@@ -40,19 +40,19 @@ class ApiService {
   register(String name, String email, String password, String address,
       String phoneNo) async {
     try {
-      // print(username + '<username and pass>' + password);
+      // print(name + '<username and pass>' + password);
       final customerregister =
           Uri.parse('http://localhost:5000/signup/customer');
 
       var data = {
-        'EMAIL': email,
-        'PASSWORD': password,
+        'EMAIL': "email",
+        'PASSWORD': "password",
         'CUSTOMER_NAME': name,
-        'ADDRESS': address,
-        'PHONE_NO': phoneNo,
+        'ADDRESS': "address",
+        'PHONE_NO': "phoneNo",
         'BILLING_AMT': 0,
         'PEOPLE_ACCOMPANYING': 1,
-        'TIMESTAMP': null,
+        'ENTRYTIME': null,
         'BENCH_NUM': null,
         'EXITTIME': null
       };
@@ -67,15 +67,13 @@ class ApiService {
       //       "Accept": "application/json",
       //     },
       //     body: body);
-      http.Response res = await http.post(
-        customerregister, body: body,
-        //      headers: {
-        //   "Access-Control-Allow-Origin": "http://localhost:5000",
-        //   "Access-Control-Allow-Credentials": "true",
-        //   "Content-type": "application/json",
-        //   "Accept": "application/json",
-        // }
-      );
+      http.Response res =
+          await http.post(customerregister, body: body, headers: {
+        // "Access-Control-Allow-Origin": "http://localhost:5000",
+        // "Access-Control-Allow-Credentials": "true",
+        "Content-type": "application/json",
+        "Accept": "application/json",
+      });
       print(jsonDecode(res.body).toString());
       print(res.body.trim());
 

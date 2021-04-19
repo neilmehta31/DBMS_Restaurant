@@ -287,6 +287,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void register() async {
     var apiservice = ApiService();
+    // print('name = ' + _usernameControl.text);
     var regsiterservice = await apiservice.register(
         _usernameControl.text,
         _emailControl.text,
