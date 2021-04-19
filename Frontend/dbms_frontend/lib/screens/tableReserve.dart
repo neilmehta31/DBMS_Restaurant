@@ -1,3 +1,4 @@
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:dbms_frontend/util/tableDetails.dart';
 
@@ -9,9 +10,12 @@ class TableReserve extends StatefulWidget {
 }
 
 class _TableReserveState extends State<TableReserve> {
+  int benchid;
+
   @override
   void initState() {
     super.initState();
+
     isSelected;
     colour = colour;
   }
@@ -38,6 +42,7 @@ class _TableReserveState extends State<TableReserve> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    gestureTable(context, 0),
                     gestureTable(context, 1),
                     gestureTable(context, 2),
                     gestureTable(context, 3),
@@ -47,12 +52,12 @@ class _TableReserveState extends State<TableReserve> {
                     gestureTable(context, 7),
                     gestureTable(context, 8),
                     gestureTable(context, 9),
-                    gestureTable(context, 10),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    gestureTable(context, 10),
                     gestureTable(context, 11),
                     gestureTable(context, 12),
                     gestureTable(context, 13),
@@ -62,12 +67,12 @@ class _TableReserveState extends State<TableReserve> {
                     gestureTable(context, 17),
                     gestureTable(context, 18),
                     gestureTable(context, 19),
-                    gestureTable(context, 20),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    gestureTable(context, 20),
                     gestureTable(context, 21),
                     gestureTable(context, 22),
                     gestureTable(context, 23),
@@ -77,7 +82,6 @@ class _TableReserveState extends State<TableReserve> {
                     gestureTable(context, 27),
                     gestureTable(context, 28),
                     gestureTable(context, 29),
-                    gestureTable(context, 30),
                   ],
                 ),
                 Column(
@@ -98,10 +102,7 @@ class _TableReserveState extends State<TableReserve> {
                                           MaterialStateProperty.all(
                                               Colors.orange)),
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (BuildContext context) {
-                                      return MainScreen();
-                                    }));
+                                    assignBenchToUser();
                                   },
                                   child: Center(
                                     child: Row(
@@ -135,6 +136,7 @@ class _TableReserveState extends State<TableReserve> {
     return GestureDetector(
       child: buildTable(context, id, colour[id]),
       onTap: () {
+        benchid = id;
         // print('tappped' + id.toString());
         setState(() {
           isSelected[id] = !isSelected[id];
@@ -156,5 +158,19 @@ class _TableReserveState extends State<TableReserve> {
         child: Center(child: Text('Table $id')),
       ),
     );
+  }
+
+  void assignBenchToUser() async {
+    var apiservice = ApiService();
+    var benchassignStatus = await apiservice.assignBench(benchid);
+    if (benchassignStatus == 'true') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return MainScreen();
+          },
+        ),
+      );
+    }
   }
 }

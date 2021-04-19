@@ -57,15 +57,15 @@ def clogin():
         return jsonify(True)
     else:
         return jsonify(False)
-        
+
+
 
 @app.route('/bench',methods=['GET'])
 def getbenchdetails():
-    # cursor = db.cursor()
-    # sql = "SELECT * FROM BENCH"
-    # cursor.execute(sql)
-    # tabledetails = cursor.fetchall()
-    tabledetails = [1,2]
+    cursor = db.cursor()
+    sql = "SELECT * FROM BENCH"
+    cursor.execute(sql)
+    tabledetails = cursor.fetchall()
     return jsonify(tabledetails)
 
 
@@ -73,7 +73,10 @@ def getbenchdetails():
 def assignbench():
     cursor = db.cursor()
     data = request.get_json()
-    id = data["CUSTOMER_ID"]
+    email = data["EMAIL"]
+    sql= "select customer_id from customers where email = %s"
+    cursor.execute(sql,email)
+    id = cursor.fetchall()
     num = data["BENCH_NUM"]
     sql = "UPDATE BENCH SET ISOCCUPIED = 1 WHERE BENCH_NUM = %s"
     cursor.execute(sql, num)
@@ -83,6 +86,16 @@ def assignbench():
     cursor.close()
     return jsonify(True)
 
+
+@app.route('/getCurrUserDetails',methods=['POST'])
+def getcurruser():
+    cursor = db.cursor()
+    data = request.get_json()
+    email = data["EMAIL"]
+    sql= "select * from customers where email = %s"
+    cursor.execute(sql,email)
+    info = cursor.fetchall()
+    return jsonify(info)
 
 @app.route('/takeorder',methods=['POST'])
 def takeorder():

@@ -1,8 +1,11 @@
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dbms_frontend/providers/app_provider.dart';
 import 'package:dbms_frontend/screens/splash.dart';
 import 'package:dbms_frontend/util/const.dart';
+
+import 'join.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -10,6 +13,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String name;
+  String email;
+  String address;
+  int phoneNo;
+  @override
+  void initState() {
+    // TODO: implement initState
+    getProfileCurrUserDetails();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +49,7 @@ class _ProfileState extends State<Profile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            "Jane Doe",
+                            "$name",
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -48,7 +62,7 @@ class _ProfileState extends State<Profile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            "jane@doefamily.com",
+                            "$email",
                             style: TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.bold,
@@ -70,14 +84,22 @@ class _ProfileState extends State<Profile> {
                                 ),
                               );
                             },
-                            child: Text(
-                              "Logout",
-                              style: TextStyle(
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                color: Theme.of(context).accentColor,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return JoinApp();
+                                }));
+                              },
+                              child: Text(
+                                "Logout",
+                                style: TextStyle(
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.w400,
+                                  color: Theme.of(context).accentColor,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
@@ -109,15 +131,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               subtitle: Text(
-                "Jane Mary Doe",
-              ),
-              trailing: IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  size: 20.0,
-                ),
-                onPressed: () {},
-                tooltip: "Edit",
+                "$name",
               ),
             ),
             ListTile(
@@ -129,7 +143,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               subtitle: Text(
-                "jane@doefamily.com",
+                "$email",
               ),
             ),
             ListTile(
@@ -141,7 +155,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               subtitle: Text(
-                "+1 816-926-6241",
+                "$phoneNo",
               ),
             ),
             ListTile(
@@ -153,31 +167,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               subtitle: Text(
-                "1278 Loving Acres RoadKansas City, MO 64110",
-              ),
-            ),
-            ListTile(
-              title: Text(
-                "Gender",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              subtitle: Text(
-                "Female",
-              ),
-            ),
-            ListTile(
-              title: Text(
-                "Date of Birth",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              subtitle: Text(
-                "April 9, 1995",
+                "$address",
               ),
             ),
             MediaQuery.of(context).platformBrightness == Brightness.dark
@@ -211,5 +201,16 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  void getProfileCurrUserDetails() async {
+    var apiservice = ApiService();
+    var user = await apiservice.getCurrUserDetails();
+    setState(() {
+      name = user[0][1];
+      email = user[0][2];
+      address = user[0][3];
+      phoneNo = user[0][4];
+    });
   }
 }

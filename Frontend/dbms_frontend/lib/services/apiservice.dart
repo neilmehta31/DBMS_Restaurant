@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
+var currUser;
+
 class ApiService {
   //Login into customers dashboard
   apilogin(String username, String password) async {
@@ -24,6 +26,8 @@ class ApiService {
         // print('hey' + res.body.trim() + 'true');
 
         if (res.body.trim() == 'true') {
+          currUser = username;
+          print(currUser);
           // print('so');
           return res.body.trim();
         }
@@ -78,6 +82,7 @@ class ApiService {
       // print(res.body.trim());
 
       if (res.statusCode == 200) {
+        currUser = email;
         // print(res.body.toString());
         // print('hey' + res.body.trim() + 'true');
         return res.body.trim();
@@ -87,6 +92,94 @@ class ApiService {
       }
     } catch (err) {
       print('Caught error in ApiService.register(): $err');
+    }
+  }
+
+  assignBench(int benchid) async {
+    try {
+      final assignBench = Uri.parse('http://localhost:5000/assignbench');
+      var data = {'EMAIL': currUser, 'BENCH_NUM': benchid};
+      var body = jsonEncode(data);
+      var res = await http.post(assignBench, body: body, headers: {
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Credentials": "true",
+        "Content-type": "application/json",
+        "Accept": "application/json",
+      });
+
+      if (res.statusCode == 200) {
+        // print(res.body.toString());
+        // print('hey' + res.body.trim() + 'true');
+
+        if (res.body.trim() == 'true') {
+          print('so' + res.body.trim());
+          return res.body.trim();
+        }
+        return res.body.trim();
+      } else {
+        // print('false = ' + res.body.toString());
+        return false;
+      }
+    } catch (err) {
+      print('Caught error: $err');
+    }
+  }
+
+  getBench() async {
+    final getBench = Uri.parse('http://localhost:5000/bench');
+    http.Response res = await http.get(getBench);
+    if (res.statusCode == 200) {
+      print(res.body);
+      return res.body.trim();
+    } else {
+      return jsonEncode({'result': 'Error'});
+    }
+  }
+
+  getCurrUsr() {
+    return currUser;
+    // try {
+    //   // getCurrUserDetails
+    //   final userurl = Uri.parse('http://localhost:5000/getCurrUserDetails');
+    //   var data = {'EMAIL': currUser};
+    //   var body = jsonEncode(data);
+    //   var res = await http.post(userurl, body: body, headers: {
+    //     // "Access-Control-Allow-Origin": "*",
+    //     // "Access-Control-Allow-Credentials": "true",
+    //     "Content-type": "application/json",
+    //     "Accept": "application/json",
+    //   });
+    //   if (res.statusCode == 200) {
+    //     print(res.body);
+    //     return res.body;
+    //   } else {
+    //     return false;
+    //   }
+    // } catch (err) {
+    //   print('Caught error: $err');
+    // }
+  }
+
+  getCurrUserDetails() async {
+    try {
+      // getCurrUserDetails
+      final userurl = Uri.parse('http://localhost:5000/getCurrUserDetails');
+      var data = {'EMAIL': currUser};
+      var body = jsonEncode(data);
+      var res = await http.post(userurl, body: body, headers: {
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Credentials": "true",
+        "Content-type": "application/json",
+        "Accept": "application/json",
+      });
+      if (res.statusCode == 200) {
+        print(res.body);
+        return res.body;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      print('Caught error: $err');
     }
   }
 }

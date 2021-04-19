@@ -1,5 +1,6 @@
 import 'package:dbms_frontend/screens/join.dart';
 import 'package:dbms_frontend/screens/placedOrders.dart';
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 
 class MakeDrawer extends StatelessWidget {
@@ -13,6 +14,7 @@ class MakeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = ApiService().getCurrUsr();
     return Drawer(
       // Add a ListView to the drawer. This ensures the user can scroll
       // through the options in the drawer if there isn't enough vertical
@@ -33,7 +35,7 @@ class MakeDrawer extends StatelessWidget {
                     Icons.person_pin,
                     size: 100,
                   ),
-                  Text('Hey User'),
+                  Text('Hey $user'),
                 ],
               ),
             ),
