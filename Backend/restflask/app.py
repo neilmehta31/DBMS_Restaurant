@@ -40,7 +40,6 @@ def csignup():
 
     db.commit()
     cursor.close()
-
     return jsonify(True)
 
 @app.route('/login/customer', methods=['POST'])
@@ -69,17 +68,38 @@ def getbenchdetails():
     return jsonify(tabledetails)
 
 
-# @app.route('/assignbench',methods=['GET', 'POST'])
-# def assignbench():
-#     cursor = db.cursor()
-#     data = request.get_json()
-#     num = data["BENCH_NUM"]
+@app.route('/assignbench',methods=['POST'])
+def assignbench():
+    cursor = db.cursor()
+    data = request.get_json()
+    id = data["CUSTOMER_ID"]
+    num = data["BENCH_NUM"]
+    sql = "UPDATE BENCH SET ISOCCUPIED = 1 WHERE BENCH_NUM = %s"
+    cursor.execute(sql, num)
+    sql = "UPDATE CUSTOMERS SET BENCH_NUM = %s WHERE CUSTOMER_ID = %s"
+    cursor.execute(sql, [num, id])
+    db.commit()
+    cursor.close()
+    return jsonify(True)
 
-#     # sql = "SELECT * FROM BENCH"
-#     # cursor.execute(sql)
-#     # tabledetails = cursor.fetchall()
-#     return jsonify(True)
 
+@app.route('/takeorder',methods=['POST'])
+def takeorder():
+    cursor = db.cursor()
+    data = request.get_json()
+    bench = data["BENCH_NUM"]
+    meal = data["MEAL_ID"]
+    sql = "SELECT MAX(ORDER_ID) FROM BENCH_MEAL "
+    
+    # orderID = 
+
+    # sql = "UPDATE BENCH SET ISOCCUPIED = 1 WHERE BENCH_NUM = %s"
+    # cursor.execute(sql, num)
+    # sql = "UPDATE CUSTOMERS SET BENCH_NUM = %s WHERE CUSTOMER_ID = %s"
+    # cursor.execute(sql, [num, id])
+    # db.commit()
+    # cursor.close()
+    # return jsonify(True)
 
 @app.route('/addtables',methods=['POST'])
 def addtabledetails():
@@ -112,22 +132,27 @@ if __name__ == '__main__':
 
 
 
+#takeorder
+#bring the bill
 
 
+# GIVE CUSTOMER A BUTTON TO BRING BILL
+# ADD THIS TIME TO EXIT TIME OF CUSTOMER.
 
+# WHEN CUSTOMER ORDERS A ORDER, ADD THAT TIME TO ORDERTIME IN BENCH_MEAL
 
 # customer BILLING_AMT
-#     BENCH_NUM
+#     BENCH_NUM IN BENCH_MEAL WHERE ORDERTIME (CORROSPONDING TO BENCHNUM OF THAT CUSTOMER) IS BETWEEN ENTRYTIME AND EXITTIME
 #         mealID - prize, 1000
-#         delete the rows from bench meal where BENCH_NUM = CUSTOMERS.BENCH_NUM
-        
+        # change isoccupied of bench to 0     
+        # ADD CURRENT TIME TO EXIT TIME OF CUSTOMER
 
-#     bench meal        
+#     bench meal        3;30      4:30
 
-#     orderID       101    102     103  104  105  106   107   108
-#     BenchNIM      4      4        4    5     5    6    4 
-#     mealID        1      2        3    1     2    2    
-
+#     orderID        101 102 103  104  105  106   107   108  109
+#     BenchNUM         4   4   4    5   5    6     4
+#     mealID           1   2   2    1   3   
+#     ORDERTIME       4BAJE
 
 #     meal_ingredient;
 #     combo  101  102  103
