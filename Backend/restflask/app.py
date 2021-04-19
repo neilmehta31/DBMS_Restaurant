@@ -14,7 +14,6 @@ CORS(app)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
-    print("knalkd")
     cursor = db.cursor()
     data = request.get_json()
     
@@ -34,7 +33,7 @@ def csignup():
     BENCH_NUM = data['BENCH_NUM']
     EXITTIME = data['EXITTIME']
     sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, TIMESTAMP, BENCH_NUM, EXITTIME]
+    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
     cursor.execute(sql,  params)
     
     db.commit()
@@ -49,10 +48,9 @@ def clogin():
     password = data['PASSWORD']
     print(email,'<email and pass>',password)
     sql = "SELECT PASSWORD FROM CUSTOMERS WHERE EMAIL = %s"
-    cursor.execute(sql, email)
+    cursor.execute(sql, (email,))
     incomingpassword = cursor.fetchall()
     passwordmatch = incomingpassword[0][0]
-    print(password, passwordmatch)
     cursor.close()
     if passwordmatch == password:
         return jsonify(True)
