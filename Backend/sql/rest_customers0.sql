@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rest
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,29 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `meal`
+-- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `meal`;
+DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `meal` (
-  `MEAL_ID` int NOT NULL,
-  `MEAL_NAME` varchar(20) DEFAULT NULL,
-  `MEAL_PRICE` int DEFAULT NULL,
-  `RATING` int DEFAULT NULL,
-  `EST_TIME` time DEFAULT NULL,
-  PRIMARY KEY (`MEAL_ID`)
+CREATE TABLE `customers` (
+  `CUSTOMER_ID` int NOT NULL,
+  `CUSTOMER_NAME` varchar(20) DEFAULT NULL,
+  `email` varchar(35) DEFAULT NULL,
+  `PASSWORD` varchar(20) DEFAULT NULL,
+  `ADDRESS` varchar(50) DEFAULT NULL,
+  `PHONE_NO` int DEFAULT NULL,
+  `BILLING_AMT` int DEFAULT NULL,
+  `PEOPLE_ACCOMPANYING` int DEFAULT NULL,
+  `ENTRYTIME` datetime DEFAULT NULL,
+  `BENCH_NUM` int DEFAULT NULL,
+  `EXITTIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`CUSTOMER_ID`),
+  UNIQUE KEY `email` (`email`),
+  KEY `BENCH_NUM` (`BENCH_NUM`),
+  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`BENCH_NUM`) REFERENCES `bench` (`BENCH_NUM`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `meal`
+-- Dumping data for table `customers`
 --
 
-LOCK TABLES `meal` WRITE;
-/*!40000 ALTER TABLE `meal` DISABLE KEYS */;
-/*!40000 ALTER TABLE `meal` ENABLE KEYS */;
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'Mudit','ABC@XYZ','SFS','jammu',12345,760,2,'2000-03-25 00:00:00',0,'2021-04-19 21:00:13'),(2,'Mudit','AABC@XYZ','SSFS','jammu',12345,123,2,'2021-04-19 00:00:00',1,'2021-04-19 20:47:55'),(3,'Mudit','AAABC@XYZ','SSSFS','jammu',12345,123,2,'2021-04-19 18:53:53',NULL,NULL),(4,'test','a@z','a@z','jammu',12345,NULL,2,'2021-04-19 21:20:21',1,NULL);
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-19 12:17:51
+-- Dump completed on 2021-04-20  1:50:33

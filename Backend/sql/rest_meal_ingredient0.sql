@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rest
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,28 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `waiter`
+-- Table structure for table `meal_ingredient`
 --
 
-DROP TABLE IF EXISTS `waiter`;
+DROP TABLE IF EXISTS `meal_ingredient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `waiter` (
-  `WAITER_ID` int NOT NULL,
-  `WAITER_NAME` varchar(20) DEFAULT NULL,
-  `PHONE_NO` int DEFAULT NULL,
-  PRIMARY KEY (`WAITER_ID`),
-  UNIQUE KEY `PHONE_NO` (`PHONE_NO`)
+CREATE TABLE `meal_ingredient` (
+  `COMBO_ID` int NOT NULL,
+  `MEAL_ID` int DEFAULT NULL,
+  `INGREDIENT_ID` int DEFAULT NULL,
+  PRIMARY KEY (`COMBO_ID`),
+  KEY `MEAL_ID` (`MEAL_ID`),
+  KEY `INGREDIENT_ID` (`INGREDIENT_ID`),
+  CONSTRAINT `meal_ingredient_ibfk_1` FOREIGN KEY (`MEAL_ID`) REFERENCES `meal` (`MEAL_ID`),
+  CONSTRAINT `meal_ingredient_ibfk_2` FOREIGN KEY (`INGREDIENT_ID`) REFERENCES `ingredient` (`INGREDIENT_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `waiter`
+-- Dumping data for table `meal_ingredient`
 --
 
-LOCK TABLES `waiter` WRITE;
-/*!40000 ALTER TABLE `waiter` DISABLE KEYS */;
-/*!40000 ALTER TABLE `waiter` ENABLE KEYS */;
+LOCK TABLES `meal_ingredient` WRITE;
+/*!40000 ALTER TABLE `meal_ingredient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `meal_ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-19 12:17:51
+-- Dump completed on 2021-04-20  1:50:35

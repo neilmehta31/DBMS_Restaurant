@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rest
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,36 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customers`
+-- Table structure for table `meal`
 --
 
-DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `meal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customers` (
-  `CUSTOMER_ID` int NOT NULL,
-  `CUSTOMER_NAME` varchar(20) DEFAULT NULL,
-  `email` varchar(35) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
-  `ADDRESS` varchar(50) DEFAULT NULL,
-  `PHONE_NO` int DEFAULT NULL,
-  `BILLING_AMT` int DEFAULT NULL,
-  `PEOPLE_ACCOMPANYING` int DEFAULT NULL,
-  `TIMESTAMP` datetime DEFAULT NULL,
-  `BENCH_NUM` int DEFAULT NULL,
-  PRIMARY KEY (`CUSTOMER_ID`),
-  KEY `BENCH_NUM` (`BENCH_NUM`),
-  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`BENCH_NUM`) REFERENCES `bench` (`BENCH_NUM`)
+CREATE TABLE `meal` (
+  `MEAL_ID` int NOT NULL,
+  `MEAL_NAME` varchar(20) DEFAULT NULL,
+  `MEAL_PRICE` int DEFAULT NULL,
+  `RATING` int DEFAULT NULL,
+  `QUANTITY_LEFT` int DEFAULT NULL,
+  PRIMARY KEY (`MEAL_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customers`
+-- Dumping data for table `meal`
 --
 
-LOCK TABLES `customers` WRITE;
-/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+LOCK TABLES `meal` WRITE;
+/*!40000 ALTER TABLE `meal` DISABLE KEYS */;
+INSERT INTO `meal` VALUES (1,'FRUIT SALAD 1',100,3,19),(2,'FRUIT SALAD 2',120,3,20),(3,'FRUIT SALAD 3',140,3,19),(4,'BURGER',200,3,20),(5,'FRENCH FRIES',100,3,20),(6,'BURGER 2',200,3,20),(7,'PIZZA 1',300,4,20),(8,'ASPARGUS 1',200,3,20),(9,'CHEESE TOMATO PIZZA',400,4,20),(10,'CORN PIZZA',400,4,20),(11,'SANDWICH',200,3,20);
+/*!40000 ALTER TABLE `meal` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-19 12:17:52
+-- Dump completed on 2021-04-20  1:50:37

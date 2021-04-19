@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rest
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,6 +26,7 @@ CREATE TABLE `bench_meal` (
   `ORDER_ID` int NOT NULL,
   `BENCH_NUM` int DEFAULT NULL,
   `MEAL_ID` int DEFAULT NULL,
+  `ORDERTIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ORDER_ID`),
   KEY `BENCH_NUM` (`BENCH_NUM`),
   KEY `MEAL_ID` (`MEAL_ID`),
@@ -40,6 +41,7 @@ CREATE TABLE `bench_meal` (
 
 LOCK TABLES `bench_meal` WRITE;
 /*!40000 ALTER TABLE `bench_meal` DISABLE KEYS */;
+INSERT INTO `bench_meal` VALUES (0,0,1,'2021-04-19 20:08:07'),(1,0,1,'2021-04-19 20:08:07'),(2,0,2,'2021-04-19 20:08:07'),(3,1,3,'2021-04-19 20:08:07'),(4,0,3,'2021-04-19 20:08:07'),(5,0,4,'2021-04-19 20:08:07'),(6,0,5,'2021-04-19 20:08:30'),(7,0,5,'2022-04-19 20:08:07'),(8,0,3,'2021-04-19 21:12:51');
 /*!40000 ALTER TABLE `bench_meal` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-19 12:17:51
+-- Dump completed on 2021-04-20  1:50:34
