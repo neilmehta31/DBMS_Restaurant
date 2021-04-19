@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pymysql
-import json
-import datetime
+from datetime import datetime
 
 db = pymysql.connect(host='localhost',
         user='veer',
@@ -15,7 +14,6 @@ CORS(app)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
-    print("knalkd")
     cursor = db.cursor()
     data = request.get_json()
     
@@ -31,19 +29,15 @@ def csignup():
     PHONE_NO = data['PHONE_NO']
     BILLING_AMT = data['BILLING_AMT']
     PEOPLE_ACCOMPANYING = data['PEOPLE_ACCOMPANYING']
-    TIMESTAMP = data['TIMESTAMP']
+    ENTRYTIME = datetime.now()
     BENCH_NUM = data['BENCH_NUM']
-    
-    sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, TIMESTAMP, BENCH_NUM ]
+    EXITTIME = data['EXITTIME']
+    sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
+    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
     cursor.execute(sql,  params)
     
-    #assign bench to customer.
-
-
     db.commit()
     cursor.close()
-
     return jsonify(True)
 
 @app.route('/login/customer', methods=['POST'])
@@ -54,10 +48,9 @@ def clogin():
     password = data['PASSWORD']
     print(email,'<email and pass>',password)
     sql = "SELECT PASSWORD FROM CUSTOMERS WHERE EMAIL = %s"
-    cursor.execute(sql, email)
+    cursor.execute(sql, (email,))
     incomingpassword = cursor.fetchall()
     passwordmatch = incomingpassword[0][0]
-    print(password, passwordmatch)
     cursor.close()
     if passwordmatch == password:
         return jsonify(True)
@@ -75,17 +68,69 @@ def getbenchdetails():
     return jsonify(tabledetails)
 
 
-# @app.route('/assignbench',methods=['GET', 'POST'])
-# def assignbench():
-#     cursor = db.cursor()
-#     data = request.get_json()
-#     num = data["BENCH_NUM"]
+@app.route('/assignbench',methods=['POST'])
+def assignbench():
+    cursor = db.cursor()
+    data = request.get_json()
+    id = data["CUSTOMER_ID"]
+    num = data["BENCH_NUM"]
+    sql = "UPDATE BENCH SET ISOCCUPIED = 1 WHERE BENCH_NUM = %s"
+    cursor.execute(sql, num)
+    sql = "UPDATE CUSTOMERS SET BENCH_NUM = %s WHERE CUSTOMER_ID = %s"
+    cursor.execute(sql, [num, id])
+    db.commit()
+    cursor.close()
+    return jsonify(True)
 
-#     # sql = "SELECT * FROM BENCH"
-#     # cursor.execute(sql)
-#     # tabledetails = cursor.fetchall()
-#     return jsonify(True)
 
+@app.route('/takeorder',methods=['POST'])
+def takeorder():
+    cursor = db.cursor()
+    data = request.get_json()
+    bench = data["BENCH_NUM"]
+    meal = data["MEAL_ID"]
+    ordertime = datetime.now()
+    sql = "SELECT COUNT(*) FROM BENCH_MEAL"
+    cursor.execute(sql)
+    orderIDtuple = cursor.fetchall()
+    orderID = orderIDtuple[0][0]
+
+    sql = "INSERT INTO BENCH_MEAL VALUES(%s,%s,%s,%s);"
+    cursor.execute(sql, [orderID, bench, meal, ordertime])
+
+    sql = " UPDATE MEAL SET QUANTITY_LEFT = QUANTITY_LEFT - 1 WHERE MEAL_ID = %s ;"
+    cursor.execute(sql, (meal,))
+
+    db.commit()
+    cursor.close()
+    return jsonify(True)
+
+
+@app.route('/bill',methods=['POST'])
+def computebill():
+    cursor = db.cursor()
+    data = request.get_json()
+    id = data["CUSTOMER_ID"]
+    sql = "UPDATE CUSTOMERS SET EXITTIME= %s WHERE CUSTOMER_ID = %s;"
+    cursor.execute(sql, (datetime.now(), id) )
+    sql = "SELECT BENCH_NUM FROM CUSTOMERS WHERE CUSTOMER_ID = %s;"
+    cursor.execute(sql, (id,) )
+    benchID = cursor.fetchall()
+    bench_num = benchID[0][0]
+    sql = """select a.bench_num, sum(b.meal_price) from bench_meal a inner join meal b on (a.meal_id = b.meal_id)
+             where a.ordertime > (SELECT ENTRYTIME FROM CUSTOMERS WHERE BENCH_NUM = %s AND CUSTOMER_ID = %s) and 
+             a.ordertime < (SELECT EXITTIME FROM CUSTOMERS WHERE BENCH_NUM = %s AND CUSTOMER_ID = %s)  and a.bench_num=%s;"""
+    cursor.execute(sql, (bench_num, id, bench_num, id, bench_num))
+    billamt = cursor.fetchall()
+    sql = "UPDATE CUSTOMERS SET BILLING_AMT = %s WHERE CUSTOMER_ID = %s;"
+    cursor.execute(sql, (int(billamt[0][1]), id) )
+
+    sql = "UPDATE BENCH SET ISOCCUPIED = 0 WHERE BENCH_NUM = %s;"
+    cursor.execute(sql, (bench_num,)) 
+
+    db.commit()
+    cursor.close()
+    return jsonify(True)
 
 @app.route('/addtables',methods=['POST'])
 def addtabledetails():
@@ -103,8 +148,8 @@ def getmenu():
     sql = "SELECT * FROM MEAL;" #"where quantity > 0"
     cursor.execute(sql)
     menu = cursor.fetchall()
+    cursor.close()
     return jsonify(menu)
-
 
 @app.route('/')
 def home():
@@ -123,29 +168,3 @@ def not_found(error=None):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-# customer BILLING_AMT
-#     BENCH_NUM
-#         mealID - prize, 1000
-#         delete the rows from bench meal where BENCH_NUM = CUSTOMERS.BENCH_NUM
-        
-
-#     bench meal        
-
-#     orderID       101    102     103  104  105  106   107   108
-#     BenchNIM      4      4        4    5     5    6    4 
-#     mealID        1      2        3    1     2    2    
-
-
-#     meal_ingredient;
-#     combo  101  102  103
-#     meal       
