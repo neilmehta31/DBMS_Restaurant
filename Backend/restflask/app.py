@@ -54,9 +54,9 @@ def clogin():
     passwordmatch = incomingpassword[0][0]
     cursor.close()
     if passwordmatch == password:
-        return jsonify({'result':'True'})
+        return jsonify(True)
     else:
-        return jsonify({'result':'False'})
+        return jsonify(False)
         
 
 @app.route('/bench',methods=['GET'])

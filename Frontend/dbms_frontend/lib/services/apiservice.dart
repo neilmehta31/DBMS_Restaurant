@@ -13,8 +13,8 @@ class ApiService {
       var body = jsonEncode(data);
       print(body);
       var res = await http.post(customerlogin, body: body, headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "true",
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Credentials": "true",
         "Content-type": "application/json",
         "Accept": "application/json",
       });
