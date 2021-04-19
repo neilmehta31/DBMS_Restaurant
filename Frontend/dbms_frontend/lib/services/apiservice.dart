@@ -45,13 +45,13 @@ class ApiService {
           Uri.parse('http://localhost:5000/signup/customer');
 
       var data = {
-        'EMAIL': "email",
-        'PASSWORD': "password",
+        'EMAIL': email,
+        'PASSWORD': password,
         'CUSTOMER_NAME': name,
-        'ADDRESS': "address",
-        'PHONE_NO': "phoneNo",
+        'ADDRESS': address,
+        'PHONE_NO': phoneNo,
         'BILLING_AMT': 0,
-        'PEOPLE_ACCOMPANYING': 1,
+        'PEOPLE_ACCOMPANYING': 0,
         'ENTRYTIME': null,
         'BENCH_NUM': null,
         'EXITTIME': null

@@ -22,22 +22,24 @@ def csignup():
     usercount = cursor.fetchall()
     
     id = int(usercount[0][0])+1
-    name = data['CUSTOMER_NAME']
-    # PASSWORD = data['PASSWORD']
-    # EMAIL = data['EMAIL']
-    # ADDRESS = data['ADDRESS']
-    # PHONE_NO = data['PHONE_NO']
-    # BILLING_AMT = data['BILLING_AMT']
-    # PEOPLE_ACCOMPANYING = data['PEOPLE_ACCOMPANYING']
-    # ENTRYTIME = datetime.now()
-    # BENCH_NUM = data['BENCH_NUM']
-    # EXITTIME = data['EXITTIME']
-    # sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-    # params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
-    # cursor.execute(sql,  params)
-    print(name)
-    # db.commit()
-    # cursor.close()
+    CUSTOMER_NAME = data['CUSTOMER_NAME']
+    PASSWORD = data['PASSWORD']
+    EMAIL = data['EMAIL']
+    ADDRESS = data['ADDRESS']
+    PHONE_NO = data['PHONE_NO']
+    BILLING_AMT = data['BILLING_AMT']
+    PEOPLE_ACCOMPANYING = data['PEOPLE_ACCOMPANYING']
+    ENTRYTIME = datetime.now()
+    BENCH_NUM = data['BENCH_NUM']
+    EXITTIME = data['EXITTIME']
+    # sql = "ALTER TABLE CUSTOMERS ADD COLUMN EXITTIME;"
+    sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
+    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
+    cursor.execute(sql,  params)
+
+    # print(data)
+    db.commit()
+    cursor.close()
     return jsonify({'result':'True'})
 
 @app.route('/login/customer', methods=['POST'])
