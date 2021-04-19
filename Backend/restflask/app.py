@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pymysql
-import datetime
+from datetime import datetime
+
 
 db = pymysql.connect(host='localhost',
         user='veer',
@@ -28,16 +29,13 @@ def csignup():
     PHONE_NO = data['PHONE_NO']
     BILLING_AMT = data['BILLING_AMT']
     PEOPLE_ACCOMPANYING = data['PEOPLE_ACCOMPANYING']
-    TIMESTAMP = data['TIMESTAMP']
+    ENTRYTIME = datetime.now()
     BENCH_NUM = data['BENCH_NUM']
-    
-    sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, TIMESTAMP, BENCH_NUM ]
+    EXITTIME = data['EXITTIME']
+    sql = "INSERT INTO CUSTOMERS VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
+    params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, TIMESTAMP, BENCH_NUM, EXITTIME]
     cursor.execute(sql,  params)
     
-    #assign bench to customer.
-
-
     db.commit()
     cursor.close()
     return jsonify(True)
@@ -89,17 +87,48 @@ def takeorder():
     data = request.get_json()
     bench = data["BENCH_NUM"]
     meal = data["MEAL_ID"]
-    sql = "SELECT MAX(ORDER_ID) FROM BENCH_MEAL "
-    
-    # orderID = 
+    ordertime = datetime.now()
+    sql = "SELECT COUNT(*) FROM BENCH_MEAL"
+    cursor.execute(sql)
+    orderIDtuple = cursor.fetchall()
+    orderID = orderIDtuple[0][0]
 
-    # sql = "UPDATE BENCH SET ISOCCUPIED = 1 WHERE BENCH_NUM = %s"
-    # cursor.execute(sql, num)
-    # sql = "UPDATE CUSTOMERS SET BENCH_NUM = %s WHERE CUSTOMER_ID = %s"
-    # cursor.execute(sql, [num, id])
-    # db.commit()
-    # cursor.close()
-    # return jsonify(True)
+    sql = "INSERT INTO BENCH_MEAL VALUES(%s,%s,%s,%s);"
+    cursor.execute(sql, [orderID, bench, meal, ordertime])
+
+    sql = " UPDATE MEAL SET QUANTITY_LEFT = QUANTITY_LEFT - 1 WHERE MEAL_ID = %s ;"
+    cursor.execute(sql, (meal,))
+
+    db.commit()
+    cursor.close()
+    return jsonify(True)
+
+
+@app.route('/bill',methods=['POST'])
+def computebill():
+    cursor = db.cursor()
+    data = request.get_json()
+    id = data["CUSTOMER_ID"]
+    sql = "UPDATE CUSTOMERS SET EXITTIME= %s WHERE CUSTOMER_ID = %s;"
+    cursor.execute(sql, (datetime.now(), id) )
+    sql = "SELECT BENCH_NUM FROM CUSTOMERS WHERE CUSTOMER_ID = %s;"
+    cursor.execute(sql, (id,) )
+    benchID = cursor.fetchall()
+    bench_num = benchID[0][0]
+    sql = """select a.bench_num, sum(b.meal_price) from bench_meal a inner join meal b on (a.meal_id = b.meal_id)
+             where a.ordertime > (SELECT ENTRYTIME FROM CUSTOMERS WHERE BENCH_NUM = %s AND CUSTOMER_ID = %s) and 
+             a.ordertime < (SELECT EXITTIME FROM CUSTOMERS WHERE BENCH_NUM = %s AND CUSTOMER_ID = %s)  and a.bench_num=%s;"""
+    cursor.execute(sql, (bench_num, id, bench_num, id, bench_num))
+    billamt = cursor.fetchall()
+    sql = "UPDATE CUSTOMERS SET BILLING_AMT = %s WHERE CUSTOMER_ID = %s;"
+    cursor.execute(sql, (int(billamt[0][1]), id) )
+
+    sql = "UPDATE BENCH SET ISOCCUPIED = 0 WHERE BENCH_NUM = %s;"
+    cursor.execute(sql, (bench_num,)) 
+
+    db.commit()
+    cursor.close()
+    return jsonify(True)
 
 @app.route('/addtables',methods=['POST'])
 def addtabledetails():
@@ -117,8 +146,8 @@ def getmenu():
     sql = "SELECT * FROM MEAL;" #"where quantity > 0"
     cursor.execute(sql)
     menu = cursor.fetchall()
+    cursor.close()
     return jsonify(menu)
-
 
 @app.route('/')
 def home():
@@ -126,34 +155,3 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-#takeorder
-#bring the bill
-
-
-# GIVE CUSTOMER A BUTTON TO BRING BILL
-# ADD THIS TIME TO EXIT TIME OF CUSTOMER.
-
-# WHEN CUSTOMER ORDERS A ORDER, ADD THAT TIME TO ORDERTIME IN BENCH_MEAL
-
-# customer BILLING_AMT
-#     BENCH_NUM IN BENCH_MEAL WHERE ORDERTIME (CORROSPONDING TO BENCHNUM OF THAT CUSTOMER) IS BETWEEN ENTRYTIME AND EXITTIME
-#         mealID - prize, 1000
-        # change isoccupied of bench to 0     
-        # ADD CURRENT TIME TO EXIT TIME OF CUSTOMER
-
-#     bench meal        3;30      4:30
-
-#     orderID        101 102 103  104  105  106   107   108  109
-#     BenchNUM         4   4   4    5   5    6     4
-#     mealID           1   2   2    1   3   
-#     ORDERTIME       4BAJE
-
-#     meal_ingredient;
-#     combo  101  102  103
-#     meal       
