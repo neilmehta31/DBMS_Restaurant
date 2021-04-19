@@ -1,3 +1,4 @@
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:dbms_frontend/screens/main_screen.dart';
 
@@ -10,6 +11,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _usernameControl = new TextEditingController();
   final TextEditingController _emailControl = new TextEditingController();
   final TextEditingController _passwordControl = new TextEditingController();
+  final TextEditingController _addressControl = new TextEditingController();
+  final TextEditingController _phoneNoControl = new TextEditingController();
+  // final TextEditingController _passwordControl = new TextEditingController();
+  // final TextEditingController _passwordControl = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  hintText: "Username",
+                  hintText: "NAME",
                   prefixIcon: Icon(
                     Icons.perm_identity,
                     color: Colors.black,
@@ -106,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  hintText: "Email",
+                  hintText: "EMAIL",
                   prefixIcon: Icon(
                     Icons.mail_outline,
                     color: Colors.black,
@@ -150,7 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  hintText: "Password",
+                  hintText: "PASSWORD",
                   prefixIcon: Icon(
                     Icons.lock_outline,
                     color: Colors.black,
@@ -166,6 +171,94 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
           ),
+          SizedBox(height: 10.0),
+          Card(
+            elevation: 3.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5.0),
+                ),
+              ),
+              child: TextField(
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.black,
+                ),
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  hintText: "ADDRESS",
+                  prefixIcon: Icon(
+                    Icons.home,
+                    color: Colors.black,
+                  ),
+                  hintStyle: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.black,
+                  ),
+                ),
+                maxLines: 1,
+                controller: _addressControl,
+              ),
+            ),
+          ),
+          SizedBox(height: 10.0),
+          Card(
+            elevation: 3.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5.0),
+                ),
+              ),
+              child: TextField(
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.black,
+                ),
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  hintText: "PHONE NO",
+                  prefixIcon: Icon(
+                    Icons.phone,
+                    color: Colors.black,
+                  ),
+                  hintStyle: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.black,
+                  ),
+                ),
+                maxLines: 1,
+                controller: _phoneNoControl,
+              ),
+            ),
+          ),
           SizedBox(height: 40.0),
           Container(
             height: 50.0,
@@ -177,13 +270,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return MainScreen();
-                    },
-                  ),
-                );
+                register();
               },
               color: Theme.of(context).accentColor,
             ),
@@ -196,5 +283,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ],
       ),
     );
+  }
+
+  void register() async {
+    var apiservice = ApiService();
+    var regsiterservice = await apiservice.register(
+        _usernameControl.text,
+        _emailControl.text,
+        _passwordControl.text,
+        _addressControl.text,
+        _phoneNoControl.text);
+    if (regsiterservice == 'true') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return MainScreen();
+          },
+        ),
+      );
+    }
   }
 }
