@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
+    print("knalkd")
     cursor = db.cursor()
     data = request.get_json()
     sql = "SELECT COUNT(*) FROM CUSTOMERS"
@@ -48,7 +49,23 @@ def clogin():
         return jsonify(True)
     else:
         return "email/password does not match, please re-enter"
-
+@app.route('/tables',methods=['GET'])
+def gettabledetails():
+    cursor = db.cursor()
+    sql = "SELECT * FROM BENCH"
+    cursor.execute(sql)
+    tabledetails = cursor.fetchall()
+    return jsonify(tabledetails)
+    
+@app.route('/addtables',methods=['POST'])
+def addtabledetails():
+    cursor=db.cursor()
+    sql = "INSERT INTO BENCH VALUES(%s,0,NULL);"
+    for i in range(30):
+        cursor.execute(sql,i)
+    db.commit()
+    cursor.close()
+    return jsonify(True)
 @app.route('/')
 def home():
     return "success"
