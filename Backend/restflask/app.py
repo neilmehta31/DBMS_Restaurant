@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pymysql
 from datetime import datetime
 
@@ -9,6 +10,7 @@ db = pymysql.connect(host='localhost',
         charset='utf8mb4')
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/signup/customer', methods=['POST'])
 def csignup():
@@ -35,10 +37,9 @@ def csignup():
     params = [id, CUSTOMER_NAME, EMAIL, PASSWORD, ADDRESS, PHONE_NO, BILLING_AMT, PEOPLE_ACCOMPANYING, ENTRYTIME, BENCH_NUM, EXITTIME]
     cursor.execute(sql,  params)
 
-    # print(data)
     db.commit()
     cursor.close()
-    return jsonify({'result':'True'})
+    return jsonify(True)
 
 @app.route('/login/customer', methods=['POST'])
 def clogin():

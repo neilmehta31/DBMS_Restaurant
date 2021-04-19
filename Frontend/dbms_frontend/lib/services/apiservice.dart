@@ -49,9 +49,9 @@ class ApiService {
         'PASSWORD': password,
         'CUSTOMER_NAME': name,
         'ADDRESS': address,
-        'PHONE_NO': phoneNo,
+        'PHONE_NO': int.parse(phoneNo),
         'BILLING_AMT': 0,
-        'PEOPLE_ACCOMPANYING': 0,
+        'PEOPLE_ACCOMPANYING': null,
         'ENTRYTIME': null,
         'BENCH_NUM': null,
         'EXITTIME': null
@@ -72,10 +72,10 @@ class ApiService {
         // "Access-Control-Allow-Origin": "http://localhost:5000",
         // "Access-Control-Allow-Credentials": "true",
         "Content-type": "application/json",
-        "Accept": "application/json",
+        "Accept": "application/json"
       });
-      print(jsonDecode(res.body).toString());
-      print(res.body.trim());
+      // print(jsonDecode(res.body).toString());
+      // print(res.body.trim());
 
       if (res.statusCode == 200) {
         // print(res.body.toString());

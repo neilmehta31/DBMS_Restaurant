@@ -1,3 +1,4 @@
+import 'package:dbms_frontend/screens/tableReserve.dart';
 import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:dbms_frontend/screens/main_screen.dart';
@@ -294,11 +295,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _passwordControl.text,
         _addressControl.text,
         _phoneNoControl.text);
-    if (regsiterservice == 'true') {
+    print('regsterservice is =' + regsiterservice);
+    if (regsiterservice.toString() == 'true') {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return MainScreen();
+            return TableReserve();
           },
         ),
       );
