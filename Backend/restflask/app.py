@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import pymysql
+import datetime
 
 db = pymysql.connect(host='localhost',
         user='veer',
@@ -34,7 +35,7 @@ def csignup():
     cursor.close()
     return "Success"
 
-@app.route('/login/customer', methods=['GET'])
+@app.route('/login/customer', methods=['POST'])
 def clogin():
     cursor = db.cursor()
     data = request.get_json()
@@ -66,6 +67,17 @@ def addtabledetails():
     db.commit()
     cursor.close()
     return jsonify(True)
+
+
+@app.route('/menu',methods=['GET'])
+def getmenu():
+    cursor=db.cursor()
+    sql = "SELECT * FROM MEAL;"
+    cursor.execute(sql)
+    menu = cursor.fetchall()
+    return jsonify(menu)
+
+
 @app.route('/')
 def home():
     return "success"
