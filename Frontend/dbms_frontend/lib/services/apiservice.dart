@@ -182,4 +182,19 @@ class ApiService {
       print('Caught error: $err');
     }
   }
+
+  getMealsData() async {
+    try {
+      final getMeals = Uri.parse('http://localhost:5000/menu');
+      http.Response res = await http.get(getMeals);
+      if (res.statusCode == 200) {
+        print(res.body);
+        return res.body.trim();
+      } else {
+        return jsonEncode({'result': 'Error'});
+      }
+    } catch (err) {
+      print('Caught error: $err');
+    }
+  }
 }

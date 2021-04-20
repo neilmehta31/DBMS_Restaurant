@@ -57,7 +57,7 @@ class GridProduct extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 SmoothStarRating(
-                  starCount: 5,
+                  starCount: 3,
                   color: Constants.ratingBG,
                   allowHalfRating: true,
                   rating: rating,

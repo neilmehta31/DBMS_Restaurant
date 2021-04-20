@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:dbms_frontend/screens/search.dart';
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:dbms_frontend/widgets/grid_product.dart';
 import 'package:dbms_frontend/util/foods.dart';
@@ -9,6 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
+  List mealsdata;
+
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     for (var i = 0; i < list.length; i++) {
@@ -16,6 +21,12 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     }
 
     return result;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getMealsDatafunc();
   }
 
   @override
@@ -48,17 +59,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                FlatButton(
-                  child: Text(
-                    "View More",
-                    style: TextStyle(
-//                      fontSize: 22,
-//                      fontWeight: FontWeight.w800,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  onPressed: () {},
-                ),
               ],
             ),
             SizedBox(height: 10.0),
@@ -71,7 +71,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                 childAspectRatio: MediaQuery.of(context).size.width /
                     (MediaQuery.of(context).size.height / 1.25),
               ),
-              itemCount: foods == null ? 0 : foods.length,
+              itemCount: mealsdata == null ? 0 : mealsdata.length,
               itemBuilder: (BuildContext context, int index) {
 //                Food food = Food.fromJson(foods[index]);
                 Map food = foods[index];
@@ -79,8 +79,8 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
 //                print(foods.length);
                 return GridProduct(
                   img: food['img'],
-                  name: food['name'],
-                  rating: 5.0,
+                  name: mealsdata[1],
+                  rating: mealsdata[3],
                   raters: 23,
                 );
               },
@@ -94,4 +94,14 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
 
   @override
   bool get wantKeepAlive => true;
+
+  getMealsDatafunc() async {
+    var apiservice = ApiService();
+    var meals = await apiservice.getMealsData();
+    List<dynamic> mealslist = jsonDecode(meals);
+    setState(() {
+      mealsdata = mealslist;
+    });
+    print('meals data in profile is =' + mealsdata.length.toString());
+  }
 }
