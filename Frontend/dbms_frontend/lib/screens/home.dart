@@ -79,8 +79,8 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
 //                print(foods.length);
                 return GridProduct(
                   img: food['img'],
-                  name: mealsdata[1],
-                  rating: mealsdata[3],
+                  name: mealsdata[index][1],
+                  rating: mealsdata[index][3],
                   raters: 23,
                 );
               },
