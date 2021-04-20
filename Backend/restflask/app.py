@@ -126,6 +126,13 @@ def takeorder():
     return jsonify(True)
 
 
+@app.route('/getUserOrder',methods=['POST'])
+def userOrder():
+    
+
+
+
+
 @app.route('/bill',methods=['POST'])
 def computebill():
     cursor = db.cursor()
