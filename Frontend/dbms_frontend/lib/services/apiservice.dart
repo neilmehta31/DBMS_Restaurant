@@ -173,8 +173,8 @@ class ApiService {
         "Accept": "application/json",
       });
       if (res.statusCode == 200) {
-        print(res.body);
-        return res.body;
+        print(res.body.trim());
+        return res.body.trim();
       } else {
         return false;
       }

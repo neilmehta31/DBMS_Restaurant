@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,11 +19,11 @@ class _ProfileState extends State<Profile> {
   String email;
   String address;
   int phoneNo;
+
   @override
   void initState() {
-    // TODO: implement initState
-    getProfileCurrUserDetails();
     super.initState();
+    getProfileCurrUserDetails();
   }
 
   @override
@@ -206,11 +208,16 @@ class _ProfileState extends State<Profile> {
   void getProfileCurrUserDetails() async {
     var apiservice = ApiService();
     var user = await apiservice.getCurrUserDetails();
+    print('user data in profile is =' + user);
+    List<dynamic> userlist = jsonDecode(user);
+// for (String string in userlist) { ... }
+    print(userlist.runtimeType);
     setState(() {
-      name = user[0][1];
-      email = user[0][2];
-      address = user[0][3];
-      phoneNo = user[0][4];
+      name = userlist[0][1];
+      email = userlist[0][2];
+      address = userlist[0][4];
+      phoneNo = userlist[0][5];
     });
+    print('global vars = ' + name + email + address + phoneNo.toString());
   }
 }
