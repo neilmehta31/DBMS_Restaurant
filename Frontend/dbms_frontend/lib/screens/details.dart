@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:dbms_frontend/util/comments.dart';
 import 'package:dbms_frontend/util/const.dart';
@@ -5,7 +8,19 @@ import 'package:dbms_frontend/util/foods.dart';
 import 'package:dbms_frontend/widgets/badge.dart';
 import 'package:dbms_frontend/widgets/smooth_star_rating.dart';
 
+import 'checkout.dart';
+
 class ProductDetails extends StatefulWidget {
+  final String name;
+  final String img;
+  final double rating;
+  final int index;
+  final int price;
+  final int quantity;
+
+  ProductDetails(@required this.name, @required this.img, @required this.rating,
+      @required this.index, @required this.price, @required this.quantity);
+
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
@@ -41,7 +56,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
-                      "${foods[1]['img']}",
+                      "${widget.img}",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -68,7 +83,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             SizedBox(height: 10.0),
             Text(
-              "${foods[1]['name']}",
+              "${widget.name}",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
@@ -88,7 +103,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   SizedBox(width: 10.0),
                   Text(
-                    "5.0 (23 Reviews)",
+                    "${widget.rating}",
                     style: TextStyle(
                       fontSize: 11.0,
                     ),
@@ -101,7 +116,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    "20 Pieces",
+                    "${widget.quantity} Pieces",
                     style: TextStyle(
                       fontSize: 11.0,
                       fontWeight: FontWeight.w300,
@@ -109,7 +124,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   SizedBox(width: 10.0),
                   Text(
-                    r"$90",
+                    r"$ " + "${widget.price}",
                     style: TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w900,
@@ -209,15 +224,34 @@ class _ProductDetailsState extends State<ProductDetails> {
         height: 50.0,
         child: RaisedButton(
           child: Text(
-            "ADD TO CART",
+            "Place Order",
             style: TextStyle(
               color: Colors.white,
             ),
           ),
           color: Theme.of(context).accentColor,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return Checkout(widget.name, widget.img, widget.rating,
+                      widget.index, widget.price, widget.quantity);
+                },
+              ),
+            );
+          },
         ),
       ),
     );
   }
+
+  // getMealsDatafunc() async {
+  //   var apiservice = ApiService();
+  //   var meals = await apiservice.getMealsData();
+  //   List<dynamic> mealslist = jsonDecode(meals);
+  //   setState(() {
+  //     mealsdata = mealslist;
+  //   });
+  //   print('meals data in profile is =' + mealsdata.length.toString());
+  // }
 }

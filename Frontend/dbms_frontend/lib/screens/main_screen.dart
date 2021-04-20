@@ -1,7 +1,6 @@
 import 'package:dbms_frontend/widgets/madeDrawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dbms_frontend/screens/cart.dart';
 import 'package:dbms_frontend/screens/home.dart';
 import 'package:dbms_frontend/screens/profile.dart';
 import 'package:dbms_frontend/screens/search.dart';
@@ -36,7 +35,6 @@ class _MainScreenState extends State<MainScreen> {
           children: <Widget>[
             Home(),
             SearchScreen(),
-            CartScreen(),
             Profile(),
           ],
         ),

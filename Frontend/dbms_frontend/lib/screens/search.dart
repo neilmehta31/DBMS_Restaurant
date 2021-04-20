@@ -1,4 +1,3 @@
-import 'package:dbms_frontend/screens/cart.dart';
 import 'package:dbms_frontend/screens/home.dart';
 import 'package:dbms_frontend/screens/profile.dart';
 import 'package:flutter/material.dart';
@@ -56,19 +55,6 @@ class _SearchScreenState extends State<SearchScreen>
                   return Home();
                 }));
                 // Update the state of the app.
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Cart'),
-              leading: Icon(Icons.shopping_cart_rounded),
-              onTap: () {
-                // Update the state of the app.
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return CartScreen();
-                }));
-                // ...
                 Navigator.pop(context);
               },
             ),

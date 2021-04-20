@@ -8,15 +8,18 @@ class GridProduct extends StatelessWidget {
   final String img;
   // final bool isFav;
   final double rating;
-  final int raters;
+  final int index;
+  final int price;
+  final int quantity;
 
   GridProduct(
       {Key key,
       @required this.name,
       @required this.img,
-      // @required this.isFav,
       @required this.rating,
-      @required this.raters})
+      @required this.index,
+      this.price,
+      this.quantity})
       : super(key: key);
 
   @override
@@ -64,7 +67,7 @@ class GridProduct extends StatelessWidget {
                   size: 10.0,
                 ),
                 Text(
-                  " $rating ($raters Reviews)",
+                  " $rating",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
@@ -78,7 +81,7 @@ class GridProduct extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return ProductDetails();
+              return ProductDetails(name, img, rating, index, price, quantity);
             },
           ),
         );

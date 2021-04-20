@@ -50,16 +50,6 @@ class MakeDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Cart'),
-            leading: Icon(Icons.shopping_cart_rounded),
-            onTap: () {
-              // Update the state of the app.
-              _pageController.jumpToPage(2);
-              // ...
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             title: Text('Order Status'),
             leading: Icon(Icons.food_bank_sharp),
             onTap: () {
@@ -75,7 +65,7 @@ class MakeDrawer extends StatelessWidget {
             leading: Icon(Icons.person),
             onTap: () {
               // Update the state of the app.
-              _pageController.jumpToPage(3);
+              _pageController.jumpToPage(2);
               // ...
               Navigator.pop(context);
             },

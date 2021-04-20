@@ -78,11 +78,12 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
 //                print(foods);
 //                print(foods.length);
                 return GridProduct(
-                  img: food['img'],
-                  name: mealsdata[index][1],
-                  rating: mealsdata[index][3],
-                  raters: 23,
-                );
+                    img: food['img'],
+                    index: index,
+                    name: mealsdata[index][1],
+                    rating: mealsdata[index][3],
+                    price: mealsdata[index][2],
+                    quantity: mealsdata[index][4]);
               },
             ),
             SizedBox(height: 30),

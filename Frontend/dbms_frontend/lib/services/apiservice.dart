@@ -197,4 +197,27 @@ class ApiService {
       print('Caught error: $err');
     }
   }
+
+  takeOrder(String mealID) async {
+    try {
+      // getCurrUserDetails
+      final userurl = Uri.parse('http://localhost:5000/takeorder');
+      var data = {'EMAIL': currUser, 'MEAL_NAME': mealID};
+      var body = jsonEncode(data);
+      var res = await http.post(userurl, body: body, headers: {
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Credentials": "true",
+        "Content-type": "application/json",
+        "Accept": "application/json",
+      });
+      if (res.statusCode == 200) {
+        print(res.body.trim());
+        return res.body.trim();
+      } else {
+        return false;
+      }
+    } catch (err) {
+      print('Caught error: $err');
+    }
+  }
 }

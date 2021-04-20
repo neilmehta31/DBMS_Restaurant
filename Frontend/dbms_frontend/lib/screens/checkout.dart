@@ -1,20 +1,34 @@
+import 'dart:convert';
+
 import 'package:dbms_frontend/screens/placedOrders.dart';
+import 'package:dbms_frontend/services/apiservice.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dbms_frontend/util/foods.dart';
 import 'package:dbms_frontend/widgets/cart_item.dart';
 
 class Checkout extends StatefulWidget {
+  final String name;
+  final String img;
+  final double rating;
+  final int index;
+  final int price;
+  final int quantity;
+
+  Checkout(@required this.name, @required this.img, @required this.rating,
+      @required this.index, @required this.price, @required this.quantity);
   @override
   _CheckoutState createState() => _CheckoutState();
 }
 
 class _CheckoutState extends State<Checkout> {
+  List mealsdata;
   final TextEditingController _couponlControl = new TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    getMealsDatafunc();
   }
 
   @override
@@ -46,51 +60,9 @@ class _CheckoutState extends State<Checkout> {
         child: ListView(
           children: <Widget>[
             SizedBox(height: 10.0),
-            ListTile(
-              title: Text(
-                "John Doe",
-                style: TextStyle(
-//                    fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              subtitle: Text("1278 Loving Acres Road Kansas City, MO 64110"),
-            ),
             SizedBox(height: 10.0),
             Text(
-              "Payment Method",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Card(
-              elevation: 4.0,
-              child: ListTile(
-                title: Text("John Doe"),
-                subtitle: Text(
-                  "5506 7744 8610 9638",
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                leading: Icon(
-                  FontAwesomeIcons.creditCard,
-                  size: 50.0,
-                  color: Theme.of(context).accentColor,
-                ),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.keyboard_arrow_down,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              "Items",
+              "Item",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w400,
@@ -99,19 +71,19 @@ class _CheckoutState extends State<Checkout> {
             ListView.builder(
               primary: false,
               shrinkWrap: true,
-              itemCount: foods == null ? 0 : foods.length,
+              itemCount: mealsdata == null ? 0 : 1,
               itemBuilder: (BuildContext context, int index) {
 //                Food food = Food.fromJson(foods[index]);
-                Map food = foods[index];
+
 //                print(foods);
 //                print(foods.length);
                 return CartItem(
-                  img: food['img'],
-                  isFav: false,
-                  name: food['name'],
-                  rating: 5.0,
-                  raters: 23,
-                );
+                    img: widget.img,
+                    index: widget.index,
+                    name: widget.name,
+                    rating: widget.rating,
+                    price: widget.price,
+                    quantity: widget.quantity);
               },
             ),
           ],
@@ -141,18 +113,11 @@ class _CheckoutState extends State<Checkout> {
                             ),
                           ),
                           Text(
-                            r"$ 212",
+                            r"$ " + "${widget.price}",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w900,
                               color: Theme.of(context).accentColor,
-                            ),
-                          ),
-                          Text(
-                            "Delivery charges included",
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ],
@@ -171,12 +136,7 @@ class _CheckoutState extends State<Checkout> {
                           ),
                         ),
                         onPressed: () {
-                          print('tapped place orders!!');
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext builder) =>
-                                      PlacedOrders()));
+                          takeOrder(widget.name);
                         },
                       ),
                     ),
@@ -189,5 +149,29 @@ class _CheckoutState extends State<Checkout> {
         ),
       ),
     );
+  }
+
+  getMealsDatafunc() async {
+    var apiservice = ApiService();
+    var meals = await apiservice.getMealsData();
+    List<dynamic> mealslist = jsonDecode(meals);
+    setState(() {
+      mealsdata = mealslist;
+    });
+    print('meals data in profile is =' + mealsdata.length.toString());
+  }
+
+  takeOrder(mealId) async {
+    var apiservice = ApiService();
+    var meals = await apiservice.takeOrder(mealId);
+    if (meals == 'true') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) {
+            return PlacedOrders();
+          },
+        ),
+      );
+    }
   }
 }

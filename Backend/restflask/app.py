@@ -101,8 +101,14 @@ def getcurruser():
 def takeorder():
     cursor = db.cursor()
     data = request.get_json()
-    bench = data["BENCH_NUM"]
-    meal = data["MEAL_ID"]
+    email = data["EMAIL"]
+    sql = "SELECT bench_num FROM customers where email = %s"
+    cursor.execute(sql,email)
+    bench = cursor.fetchall()
+    mealname = data["MEAL_NAME"]
+    sql = "SELECT MEAL_ID FROM meal where meal_name = %s"
+    cursor.execute(sql,mealname)
+    meal = cursor.fetchall()
     ordertime = datetime.now()
     sql = "SELECT COUNT(*) FROM BENCH_MEAL"
     cursor.execute(sql)

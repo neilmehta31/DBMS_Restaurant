@@ -1,24 +1,23 @@
-import '../util/const.dart';
-
-import '../widgets/smooth_star_rating.dart';
 import 'package:flutter/material.dart';
 import '../screens/details.dart';
 
 class CartItem extends StatelessWidget {
   final String name;
   final String img;
-  final bool isFav;
   final double rating;
-  final int raters;
+  final int index;
+  final int price;
+  final int quantity;
 
-  CartItem(
-      {Key key,
-      @required this.name,
-      @required this.img,
-      @required this.isFav,
-      @required this.rating,
-      @required this.raters})
-      : super(key: key);
+  CartItem({
+    Key key,
+    @required this.name,
+    @required this.img,
+    @required this.rating,
+    this.index,
+    this.price,
+    this.quantity,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +27,8 @@ class CartItem extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return ProductDetails();
+                return ProductDetails(
+                    name, img, rating, index, price, quantity);
               },
             ),
           );
@@ -61,30 +61,11 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10.0),
-                Row(
-                  children: <Widget>[
-                    SmoothStarRating(
-                      starCount: 1,
-                      color: Constants.ratingBG,
-                      allowHalfRating: true,
-                      rating: 5.0,
-                      size: 12.0,
-                    ),
-                    SizedBox(width: 6.0),
-                    Text(
-                      "5.0 (23 Reviews)",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 10.0),
                 Row(
                   children: <Widget>[
                     Text(
-                      "20 Pieces",
+                      "${quantity} Pieces",
                       style: TextStyle(
                         fontSize: 11.0,
                         fontWeight: FontWeight.w300,
@@ -92,7 +73,7 @@ class CartItem extends StatelessWidget {
                     ),
                     SizedBox(width: 10.0),
                     Text(
-                      r"$90",
+                      r"$" + "${price}",
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w900,
@@ -103,7 +84,7 @@ class CartItem extends StatelessWidget {
                 ),
                 SizedBox(height: 10.0),
                 Text(
-                  "Quantity: 1",
+                  "Quantity: " + "${quantity}",
                   style: TextStyle(
                     fontSize: 11.0,
                     fontWeight: FontWeight.w300,
