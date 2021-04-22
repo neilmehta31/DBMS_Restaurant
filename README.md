@@ -4,11 +4,7 @@ The project is a web app of a restaurant Work-System and hence organises its dat
 The tech stack used in this project is : 
 
        RDBSM - MySQL
-        
        Host programming language - Python
-        
-       Framework for Backend development - Django
-       
-       Front-end development - Flutter (dart)
-       
+       Framework for Backend development - Flask
+       Front-end development - Flutter (dart)       
        Version Control using Github
