@@ -12,9 +12,9 @@ The tech stack used in this project is :
 [Phase 1 Report]("https://github.com/mveer1/Database_Restaurant/blob/main/DBMS_Project_report.pdf")
 
 <br><br><br>
-<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(4).jpeg" alt="drawing" width="300" height="200"/>   <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(5).jpeg" alt="drawing" width="300" height="200"/> 
-<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(6).jpeg" alt="drawing" width="300" height="200"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(7).jpeg" alt="drawing" width="300" height="200"/>
-<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(1).jpeg" alt="drawing" width="300" height="200"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(2).jpeg" alt="drawing" width="300" height="200"/>
-<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(3).jpeg" alt="drawing" width="300" height="200"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(8).jpeg" alt="drawing" width="300" height="200"/>
-<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(9).jpeg" alt="drawing" width="300" height="200"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(10).jpeg" alt="drawing" width="300" height="200"/>
-<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(11).jpeg" alt="drawing" width="300" height="200"/>
+<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(4).jpeg" alt="drawing" width="300" height="240"/>   <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(5).jpeg" alt="drawing" width="300" height="240"/> 
+<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(6).jpeg" alt="drawing" width="300" height="240"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(7).jpeg" alt="drawing" width="300" height="240"/>
+<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(1).jpeg" alt="drawing" width="300" height="240"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(2).jpeg" alt="drawing" width="300" height="240"/>
+<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(3).jpeg" alt="drawing" width="300" height="240"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(8).jpeg" alt="drawing" width="300" height="240"/>
+<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(9).jpeg" alt="drawing" width="300" height="240"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(10).jpeg" alt="drawing" width="300" height="240"/>
+<img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(11).jpeg" alt="drawing" width="300" height="240"/>
