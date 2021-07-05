@@ -8,10 +8,17 @@ The tech stack used in this project is :
        Framework for Backend development - Flask
        Front-end development - Flutter (dart)       
        Version Control using Github
-       
-[Phase 1 Report]("https://github.com/mveer1/Database_Restaurant/blob/main/DBMS_Project_report.pdf")
 
-<br><br><br>
+Contributors : 
+>[Neil Mehta]("https://github.com/neilmehta31")<br/>
+>[Mahavir Chaudhari]("https://github.com/mveer1")<br/>
+>[Mudit Sharma]("https://github.com/MuditSharma29")<br/>
+>[Sudhanshu Chhajed]("https://github.com/Sudhanshu-Chhajed")<br/>
+
+<br/><br/>
+[Phase 1 Report Link]("https://github.com/mveer1/Database_Restaurant/blob/main/DBMS_Project_report.pdf")
+
+<br><br>
 <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(4).jpeg" alt="drawing" width="300" height="240"/>   <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(5).jpeg" alt="drawing" width="300" height="240"/> 
 <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(6).jpeg" alt="drawing" width="300" height="240"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(7).jpeg" alt="drawing" width="300" height="240"/>
 <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(1).jpeg" alt="drawing" width="300" height="240"/>  <img src="https://github.com/mveer1/Database_Restaurant/blob/main/screenshots/1%20(2).jpeg" alt="drawing" width="300" height="240"/>
