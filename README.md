@@ -1,19 +1,21 @@
 # Database_Restaurant
-This is the implementation of a real time restaurant simulation as a part of the coursework done during the 4th semester at BITS Pilani in the course Database Managenment Systems under Prof. Dr. Gururaj and Jabez Christopher.
-The project is a web app of a real time restaurant Work-System and hence organises its data.   
-Tech stack used in this project is : 
-       RDBSM - `MySQL`
-       Host programming language - `Python`
-       Framework for Backend development - `Flask`
-       Front-end development - `Flutter (dart)`       
-       Version Control using `Github`
+This is the implementation of a web application based on real time restaurant work-system simulation as a part of the coursework done during the 4th semester at BITS Pilani in the course Database Managenment Systems under Prof. Dr. Gururaj and Prof. Jabez Christopher.
 
-Contributors : <br>
-[Neil Mehta]("https://github.com/neilmehta31")<br>
-[Mahavir Chaudhari]("https://github.com/mveer1")<br>
-[Mudit Sharma]("https://github.com/MuditSharma29")<br>
-[Sudhanshu Chhajed]("https://github.com/Sudhanshu-Chhajed")<br>
+---
+#### Tech stack used in this project is : <br>
+RDBSM - `MySQL`      <br>
+Host programming language - `Python`      <br>
+Framework for Backend development - `Flask`      <br>
+Front-end development - `Flutter (dart)`        <br>
+Version Control using `Github`     <br>
 
+#### Contributors : <br>
+- [Neil Mehta]("https://github.com/neilmehta31")<br>
+- [Mahavir Chaudhari]("https://github.com/mveer1")<br>
+- [Mudit Sharma]("https://github.com/MuditSharma29")<br>
+- [Sudhanshu Chhajed]("https://github.com/Sudhanshu-Chhajed")<br>
+
+---
 <br><br>
 [Phase 1 Report here]("https://github.com/mveer1/Database_Restaurant/blob/main/DBMS_Project_report.pdf")
 
